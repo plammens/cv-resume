@@ -1,0 +1,164 @@
+\documentclass[]{twentysecondcv}
+
+\usepackage{changepage}
+
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\definecolor{lgray}{gray}{0.3}
+
+ 
+\begin{document}
+
+%%%%%%%%%%%%%%%%%
+%%PROFILE SIDE BAR%%
+%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%
+%%PERSONAL INFO%%%
+%%%%%%%%%%%%%%%%
+
+\cvname{Paolo Lammens} %your name
+\cvjobtitle{}%your actual job position
+\cvnumberphone{+34 634412833}%telphone number
+\cvmail{lammenspaolo@gmail.com}%e-mail
+\cvgithub{github.com/plammens}
+\cvlinkedin{linkedin.com/in/PaoloLammens}
+
+
+\aboutme{
+Mathematics \& Comp. Sci. student with attested interest in software development, music, and machine learning. Strong in Python.}%About me section
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%Skill bar section, each skill must have a value between 0 an 6 (float)%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\skills{{Python/4},{C++/3.5},{LaTeX/3},{R/2},{Mathematica (Wolfram Language)/3},{Git/3.5}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%Skill text section, each skill must have a value between 0 an 6%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\cvlanguages{
+    \normalsize
+    \begin{tabular}{p{2cm} L{4cm}}
+        English & \textcolor{lgray}{CEFR C1 (\textit{Cambridge Advanced English Certificate})} \\
+        Spanish & \textcolor{lgray}{Native} \\
+        Catalan & \textcolor{lgray}{Native} \\
+        Italian & \textcolor{lgray}{Maternal} \\
+        French & \textcolor{lgray}{CEFR A2 (\textit{Diplôme d'Etudes en Langue Française})} \\
+    \end{tabular}
+}
+
+\cvinterests{
+    \begin{itemize}
+        \item Music -- \textcolor{lgray}{have been playing the cello since the age of four. Obtained the ``Grau Professional'' from local conservatoire, the ``Escola Municipal de Música Victòria dels Àngels.''}
+        \item Open Source Development -- \textcolor{lgray}{have been participating in the \texttt{python-\linebreak{}telegram-bot} GitHub repository.}
+    \end{itemize}
+}
+
+\makeprofile
+
+
+
+%%%%%%%%%%%%%%%%%%%%
+%%END PROFILE SIDE BAR%%
+%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%BODY%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%
+%%SIMPLE SECTION%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+
+\begin{adjustwidth}{10pt}{10pt}
+
+\section*{Education}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%TWENTY LIST ITEMS%%%%%%%%%%%%%%
+%%    Four arguments: date; title; where; description %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\twentylen}{11cm}
+\begin{twenty}[1.5cm]
+  \twentyitem
+    {\noindent 2019 - present}
+    {\large MSci (Hon.) Mathematics \& Computing Science}
+    {University of Glasgow}
+    {Entered at Level 2. Activities \& Societies: GU Tech Society, HackerOlympics 2019, Chapel Choir, Kelvin Ensemble, Dialectic Society, GU Debates}
+  \twentyitem
+    {2018 - 2019}
+    {Mathematics \& Data Science (discontinued)}
+    {Centre de Formació Interdisciplinària Superior (CFIS) – Universitat Politècnica de Catalunya (UPC)}
+    {Double degree programme offered by CFIS in Mathematics and Data Science. The study of mathematics \& computer science has been continued at the University of Glasgow.}
+\end{twenty}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%TWENTY LIST SHORTITEMS%%%%%%%%%%%%%%
+%%% Two arguments: date; title/description %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Projects}
+
+\renewcommand{\twentylen}{9.7cm}
+\begin{twenty}[2.8cm]
+  \twentyitem
+      {November 2018 \\ (archived)}
+      {PySimplex}
+      {}
+      {Simple Python implementation of the primal simplex algorithm in linear optimization. Based on university coursework from the Mathematical Programming course. Link: \href{https://github.com/plammens/PySimplex}{github.com/plammens/PySimplex}}
+  \twentyitem
+      {July 2018 \\ (archived)}
+      {Analysing and visualising chord sequences in music}
+      {}
+      {This project involved creating a Mathematica/Wolfram Language script that analyses the harmony in music pieces and displays it as a transition graph.}
+  \twentyitem
+      {May - Dec. 2017 \\ (archived)}
+      {CENP-C – Study of a protein}
+      {}
+      {Research project for the last year of secondary education (“Treball de Recerca”) on a protein found in the chromosomes of most eukaryotic organisms.}
+\end{twenty}
+
+
+
+\section*{Courses \& programmes}
+
+\renewcommand{\twentylen}{10.2cm}
+\begin{twenty}[2.3cm]
+    \twentyitem
+    {June - July \\ 2019}
+    {MESIO Summer School 2019}
+    {Universitat Politècnica de Catalunya - Universitat de Barcelona}
+    {Attended the following courses:
+     \begin{itemize}
+         \item \textbf{Statistical and Machine Learning Methods for Classification Using R} -- learned the theoretical framework behind a range of statistical methods and models for classification and implemented them in R. Applied that knowledge to some real-word datasets. \textit{Mark: 9.8/10}
+         \item \textbf{''Curso Práctico de Deep Learning''} -- an overview of deep learning models, and their implementation with Keras. Developed and trained a 1-D convolutional model and applied some visualization techniques as the final project. \textit{Mark: 9.5/10}
+         \item \textbf{Deep Learning with PyTorch} -- introduction to deep learning using the PyTorch library. Pre-processed a text corpus and trained an RNN on it for text sentiment analysis. \textit{Mark: 9/10}
+     \end{itemize}
+    }
+    \twentyitem
+    {July \\ 2018}
+    {Wolfram High School Summer Camp}
+    {Wolfram}
+    {Attended several seminars on computer science and new technologies. Developed the project ``Analysing and visualising chord sequences in music'' using the Wolfram Language.} % TODO: add link
+    \twentyitem
+    {Jan. 2017 - \\ Jan. 2018}
+    {``Bojos per la Biomedicina''}
+    {Fundació Catalunya - La Pedrera}
+    {Completed a small experiment with one of the research teams at the Institute for Research in Biomedicine (Barcelona) every week, attending an explanatory lecture for each.}
+    \twentyitem
+    {June 2016 - \\ June 2018}
+    {``Joves i Ciència''}
+    {Fundació Catalunya - La Pedrera}
+    {Three-year scholarship awarded to 50 Catalan students with a high scientific vocation that includes first-hand participation in research. Participated in the genetics project, a stay at the Institute of Photonic Sciences (ICFO), and the Wolfram High School Summer Camp for each of the three years respectively.}
+\end{twenty}
+
+
+\end{adjustwidth}
+
+%%%%%%%%%%%%%%%%%%%%
+%%%%%ENDBODY%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+
+\end{document} 
