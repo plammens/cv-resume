@@ -291,12 +291,12 @@
   \end{adjustwidth}
 }
 %\renewcommand{\bfseries}{\color{headercolor}}
-\newcommand{\twentyitem}[4]{%
-  \raggedright #1&\parbox[t]{\twentylen}{%
-    \textbf{\textcolor{mainblue}{#2}}%
-    \ \ifthenelse{\equal{#3}{}}{}{--}
-    {\footnotesize#3}\\[3pt]%
-    \small #4\vspace{\parsep}%
+\newcommand{\twentyitem}[5][--]{%
+  \raggedright #2&\parbox[t]{\twentylen}{%
+    \textbf{\textcolor{mainblue}{#3}}%
+    \ \ifthenelse{\equal{#4}{}}{}{#1}
+    {\footnotesize#4}\\[3pt]%
+    \small #5\vspace{\parsep}%
   }\\}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
