@@ -1,0 +1,102 @@
+\documentclass[a4paper, 11pt]{article}
+\title{Paolo Lammens - CV}
+\author{Paolo Lammens}
+
+% ----- PACKAGES -----
+% page layout
+\usepackage[margin=1.5cm]{geometry}
+
+%font
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+%other
+\usepackage{longtable}
+\usepackage{tabu}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{setspace}
+
+\usepackage{array}
+\usepackage{tikz}
+    \usetikzlibrary{calc}
+\usepackage{fontawesome}
+\usepackage{marvosym}
+
+\usepackage{hyperref}
+
+% ----- CUSTOM -----
+\newcommand{\cvcolumnratio}{0.25}
+\setlength{\parindent}{0pt}
+
+% --- Colours ---
+\definecolor{myorange}{rgb}{0.85, 0.4, 0}
+\definecolor{primary}{HTML}{723C1F}
+\definecolor{secondary}{HTML}{D38806}
+\definecolor{highlight}{HTML}{3CA49D}
+
+% --- Hyperref ---
+\hypersetup{
+    colorlinks,
+    linkcolor=primary,
+    urlcolor=secondary,
+    filecolor=highlight
+}
+
+\titlespacing*{\subsection}{0pt}{0pt}{0pt}
+\setstretch{0.9}
+
+\newcommand\icon[1]{\tikz[baseline=(char.base)]{
+        \node[shape=circle,draw,inner sep=1pt, fill=myorange,myorange,text=white] (char) {#1};}}
+
+
+\begin{document}
+
+
+% ---------- CONTENT ----------
+\newcommand{\cvemail}{lammenspaolo@gmail.com}
+\newcommand{\cvphone}{+34 634412833}
+\newcommand{\cvlinkedin}{PaoloLammens}
+\newcommand{\cvgithub}{plammens}
+
+\newcommand{\cvaboutme}{Mathematics student with an interest in software development, music, and machine learning.}
+
+
+
+% ---------- FORMATTING ----------
+
+\newcommand{\cvsectiontitle}[1]{
+    \rule{5mm}{1mm}\vspace{6pt}\newline
+    {\Large\bfseries Education}
+}
+
+\hyphenpenalty=10000
+\setlength{\tabulinesep}{5pt}
+
+\begin{longtabu} to \textwidth {p{4cm} X}
+    \textbf{\huge Paolo Lammens} &%
+    \begin{tabular}{p{0.6cm}p{5.5cm}p{0.6cm}p{4cm}}%
+        \icon{@} & \href{mailto:\cvemail}{\cvemail} &
+        \Large\icon{\Telefon} & \textcolor{myorange}{\cvphone}\\
+        \icon{\faLinkedin} & \href{https://linkedin.com/in/\cvlinkedin/}{linkedin.com/in/\cvlinkedin} &
+        \icon{\faGithub} & \href{https://github.com/\cvgithub}{github.com/\cvgithub}
+    \end{tabular}
+    \vspace*{10pt}\newline
+    \textbf{About me}\newline
+    \cvaboutme
+    
+    \\
+    
+    \cvsectiontitle{Education} &
+    \rule{13.5cm}{1mm}\vspace*{5pt}
+    \textbf{Mathematics \& Computing Science, MSci} --- University of Glasgow
+%     
+     \\
+%
+    \cvsectiontitle{Education} & \\
+\end{longtabu}
+
+\end{document}
+
+
