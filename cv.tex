@@ -3,6 +3,9 @@
 \author{Paolo Lammens}
 
 % ----- PACKAGES -----
+% input encoding
+%\usepackage[utf8]{inputenc}
+
 % page layout
 \usepackage[margin=1.5cm]{geometry}
 
@@ -23,6 +26,7 @@
     \usetikzlibrary{calc}
 \usepackage{fontawesome}
 \usepackage{marvosym}
+\usepackage{ifthen}
 
 \usepackage{hyperref}
 
@@ -44,14 +48,51 @@
     filecolor=highlight
 }
 
+\titlespacing*{\section}{0pt}{0pt}{0pt}
 \titlespacing*{\subsection}{0pt}{0pt}{0pt}
-\setstretch{0.9}
 
 \newcommand\icon[1]{\tikz[baseline=(char.base)]{
         \node[shape=circle,draw,inner sep=1pt, fill=myorange,myorange,text=white] (char) {#1};}}
 
 
 \begin{document}
+
+
+% ---------- FORMATTING ----------
+\makeatletter
+
+\newcommand{\www}[1]{\href{http://#1}{#1}}
+\newcommand{\ifnn}[2]{\ifthenelse{\equal{#1}{}}{}{#2}}
+
+\newcommand{\cvsectiontitle}[1]{
+    \rule{5mm}{1mm}\vspace{2mm}
+    \section*{\Large\bfseries #1}
+}
+
+\newcommand{\cvsectionrule}{\rule{13.5cm}{1mm}\vspace*{5pt}}
+
+\newcommand{\cvchronoitem}[6]{
+    {\raggedright\textbf{#1}\ifnn{#2}{ -- #2}\par}
+    \textcolor{myorange}{\small\uppercase{#3 \ifnn{#4}{-- #4} \ifnn{#5}{$\,|\,$ #5}}}
+    \medskip\par
+    {\setstretch{0.9}\footnotesize #6 \par}
+}
+
+\newcommand{\cvsoftwareskills}{}
+
+\newcommand{\addcvsoftwareskill}[2]{
+    \g@addto@macro\cvsoftwareskills{\\ #1 \noexpand& #2}
+}
+
+% global format settings
+\hyphenpenalty=10000
+\setlength{\tabulinesep}{5pt}
+\setlength{\tabcolsep}{10pt}
+\thispagestyle{empty}
+
+\setlength{\intextsep}{0.1mm}
+
+\makeatother
 
 
 % ---------- CONTENT ----------
@@ -62,39 +103,117 @@
 
 \newcommand{\cvaboutme}{Mathematics student with an interest in software development, music, and machine learning.}
 
+\addcvsoftwareskill{Python}{fluent}
+\addcvsoftwareskill{C++}{intermediate}
+\addcvsoftwareskill{Java}{intermediate}
+\addcvsoftwareskill{\LaTeX{}}{lower-intermediate}
+\addcvsoftwareskill{Git}{advanced}
 
 
-% ---------- FORMATTING ----------
 
-\newcommand{\cvsectiontitle}[1]{
-    \rule{5mm}{1mm}\vspace{6pt}\newline
-    {\Large\bfseries Education}
-}
-
-\hyphenpenalty=10000
-\setlength{\tabulinesep}{5pt}
-
-\begin{longtabu} to \textwidth {p{4cm} X}
-    \textbf{\huge Paolo Lammens} &%
-    \begin{tabular}{p{0.6cm}p{5.5cm}p{0.6cm}p{4cm}}%
+% ------------- TYPESET -------------
+\begin{longtabu} to \textwidth {p{3.2cm} X}
+    {\huge\textbf{Paolo Lammens}} &%
+    {\setlength{\tabcolsep}{0pt}
+    \begin{tabular}{p{8mm}p{6cm}p{8mm}p{4cm}}%
         \icon{@} & \href{mailto:\cvemail}{\cvemail} &
         \Large\icon{\Telefon} & \textcolor{myorange}{\cvphone}\\
         \icon{\faLinkedin} & \href{https://linkedin.com/in/\cvlinkedin/}{linkedin.com/in/\cvlinkedin} &
         \icon{\faGithub} & \href{https://github.com/\cvgithub}{github.com/\cvgithub}
-    \end{tabular}
+    \end{tabular}}
     \vspace*{10pt}\newline
-    \textbf{About me}\newline
+    \subsection*{About me}
     \cvaboutme
     
     \\
     
     \cvsectiontitle{Education} &
-    \rule{13.5cm}{1mm}\vspace*{5pt}
-    \textbf{Mathematics \& Computing Science, MSci} --- University of Glasgow
-%     
+    \cvsectionrule
+    \cvchronoitem{\textbf{Mathematics \& Computing Science, MSci}}
+                 {University of Glasgow}
+                 {september 2019}{present}{expected graduation year: 2023}
+                 {Activities \& Societies: GU Tech Society, HackerOlympics 2019, Chapel Choir, Kelvin Ensemble, Dialectic Society, GU Debates.}
+    \bigskip
+    \cvchronoitem{\textbf{Mathematics \& Data Science}}
+                 {Centre de Formació Interdisciplinària Superior (CFIS) at Univ. Politècnica de Catalunya (UPC)}
+                 {September 2018}{may 2019}{discontinued}
+                 {Double degree programme offered by CFIS in Mathematics and Data Science. The study of mathematics \& computer science has been continued at the University of Glasgow.}
+                 
      \\
+     
+     \cvsectiontitle{Software skills} &
+     \cvsectionrule\newline
+     \begin{tabular}{p{4cm}|p{6cm}}
+          \textbf{Language/Technology} & \textbf{Skill level}
+          \cvsoftwareskills
+     \end{tabular}
 %
-    \cvsectiontitle{Education} & \\
+    \\
+%    
+    \cvsectiontitle{Courses} &
+    \cvsectionrule
+    
+    \cvchronoitem{MESIO Summer School 2019}
+                 {Univ. Politèc. de Catalunya - Univ. de Barcelona}
+                 {June}{July 2019}
+                 {}
+                 {The MESIO (Master in Statistics and Operations Research) UPC-UB Summer School is a specialized training program that offers several 15-hour courses in the span of four weeks, with topics ranging from statistics to deep learning. I attended the following courses:
+                     \begin{itemize}
+                         \item \textbf{Statistical and Machine Learning Methods for Classification Using R} -- this course presented a range of statistical methods and models for classification, with their implementation in R. \textit{Grade: 9.8/10}
+                         \item \textbf{``Curso Práctico de Deep Learning''} -- an overview of deep learning models, and their implementation with Keras in R or Python. \textit{Grade: 9.5/10}
+                         \item \textbf{``Deep Learning with PyTorch''} -- introduction to deep learning using the PyTorch library. \textit{Grade: 9/10}
+                     \end{itemize}
+                 }
+     
+     \cvchronoitem{Wolfram High School Summer Camp}
+                  {Wolfram}
+                  {July 2018}{}{}
+                  {WHSSC is a two-week program for high school students that involves developing your own project in the Wolfram Language, along with several seminars on computer science and new technologies.}
+                  
+     \smallskip
+     \cvchronoitem{“Bojos per la Ciència”}
+     {Fundació Catalunya - La Pedrera}
+     {January 2017}{January 2018}{}
+     {Educational program aimed at High School students that want to develop their scientific skills through lectures and practical sessions. Participated in the Biomedicine program.}
+     
+     \smallskip
+     \cvchronoitem{“Joves i Ciència”}
+     {Fundació Catalunya - La Pedrera}
+     {June 2016}{June 2018}{}
+     {Two-year scholarship awarded to 50 Catalan students with a high scientific vocation that includes first-hand participation in research.}
+     
+     \\
+     
+     \cvsectiontitle{Projects} &
+     \cvsectionrule
+     
+     \cvchronoitem{Analysing and visualising chord sequences in music}
+                  {}
+                  {July 2018}{}{archived}
+                  {This is the project developed as part of my stay at Wolfram High School Summer Camp. It involved creating a Mathematica script/application that analyses the harmony in music pieces and displays it as a transition graph.
+                  Link: \www{community.wolfram.com/groups/-/m/t/1383630}}
+      \smallskip
+      \cvchronoitem{PySimplex}
+      {}
+      {November 2018}{}{archived}
+      {Simple Python implementation of the primal simplex algorithm in linear optimization. Based on university coursework from the Mathematical Programming course. Link: \www{github.com/plammens/PySimplex}}
+      
+      \smallskip
+      \cvchronoitem{CENP-C -- Study of a protein}
+      {}
+      {May}{December 2017}{archived}
+      {Research project for the last year of secondary education (“Treball de Recerca”) on a protein found in the chromosomes of most eukaryotic organisms.}
+     
+     \\
+     
+     \cvsectiontitle{Languages} &
+     \cvsectionrule
+     
+     \\
+     
+     \cvsectiontitle{Musical education} &
+     \cvsectionrule
+    
 \end{longtabu}
 
 \end{document}
