@@ -27,10 +27,13 @@
 \usepackage{fontawesome}
 \usepackage{marvosym}
 \usepackage{ifthen}
+\usepackage{paracol}
 
 \usepackage{hyperref}
 
-% ----- CUSTOM -----
+
+% ---------- GLOBAL CONFIGURATION ----------
+
 \newcommand{\cvcolumnratio}{0.25}
 \setlength{\parindent}{0pt}
 
@@ -53,6 +56,22 @@
 
 \newcommand\icon[1]{\tikz[baseline=(char.base)]{
         \node[shape=circle,draw,inner sep=1pt, fill=myorange,myorange,text=white] (char) {#1};}}
+    
+
+% --- Two column environment ---
+\def\colratio{0.2}
+\def\colsep{10pt}
+
+\newenvironment{twocol}{%
+    \columnratio{\colratio}%
+    \setlength{\columnsep}{\colsep}% using the default length
+    \begin{sloppypar}%
+        \begin{paracol}{2}%
+}{%
+            \bigskip
+        \end{paracol}%
+    \end{sloppypar}%
+}
 
 
 \begin{document}
@@ -69,19 +88,23 @@
     \section*{\Large\bfseries #1}
 }
 
-\newcommand{\cvsectionrule}{\rule{13.5cm}{1mm}\vspace*{5pt}}
+\newcommand{\cvsectionrule}{\rule{\textwidth}{1mm}\vspace*{5pt}}
 
 \newcommand{\cvchronoitem}[6]{
     {\raggedright\textbf{#1}\ifnn{#2}{ -- #2}\par}
     \textcolor{myorange}{\small\uppercase{#3 \ifnn{#4}{-- #4} \ifnn{#5}{$\,|\,$ #5}}}
     \medskip\par
-    {\setstretch{0.9}\footnotesize #6 \par}
+    {\setstretch{0.9}\small #6 \par}
 }
 
 \newcommand{\cvsoftwareskills}{}
-
 \newcommand{\addcvsoftwareskill}[2]{
     \g@addto@macro\cvsoftwareskills{\\ #1 \noexpand& #2}
+}
+
+\newcommand{\cvlanguages}{}
+\newcommand{\addcvlanguage}[2]{
+    \g@addto@macro\cvlanguages{\\ #1 \noexpand& #2}
 }
 
 % global format settings
@@ -103,17 +126,29 @@
 
 \newcommand{\cvaboutme}{Mathematics student with an interest in software development, music, and machine learning.}
 
-\addcvsoftwareskill{Python}{fluent}
-\addcvsoftwareskill{C++}{intermediate}
-\addcvsoftwareskill{Java}{intermediate}
-\addcvsoftwareskill{\LaTeX{}}{lower-intermediate}
-\addcvsoftwareskill{Git}{advanced}
+\addcvsoftwareskill{Python}{Fluent}
+\addcvsoftwareskill{C++}{Intermediate}
+\addcvsoftwareskill{Java}{Intermediate}
+\addcvsoftwareskill{\LaTeX{}}{Lower intermediate}
+\addcvsoftwareskill{Git}{Advanced}
+
+
+\addcvlanguage{English}{CEFR C1 (\textit{Cambridge Advanced English certificate})}
+\addcvlanguage{Spanish}{Native}
+\addcvlanguage{Catalan}{Native}
+\addcvlanguage{Italian}{Native}
+\addcvlanguage{French}{CEFR A2 (\textit{Diplôme d'Etudes en Langue Francaise})}
 
 
 
 % ------------- TYPESET -------------
-\begin{longtabu} to \textwidth {p{3.2cm} X}
-    {\huge\textbf{Paolo Lammens}} &%
+
+
+\begin{twocol}
+    {\huge\textbf{Paolo Lammens}}
+    
+    \switchcolumn
+    
     {\setlength{\tabcolsep}{0pt}
     \begin{tabular}{p{8mm}p{6cm}p{8mm}p{4cm}}%
         \icon{@} & \href{mailto:\cvemail}{\cvemail} &
@@ -124,10 +159,13 @@
     \vspace*{10pt}\newline
     \subsection*{About me}
     \cvaboutme
+\end{twocol}
     
-    \\
+\begin{twocol}
+    \cvsectiontitle{Education}
     
-    \cvsectiontitle{Education} &
+    \switchcolumn
+    
     \cvsectionrule
     \cvchronoitem{\textbf{Mathematics \& Computing Science, MSci}}
                  {University of Glasgow}
@@ -138,21 +176,26 @@
                  {Centre de Formació Interdisciplinària Superior (CFIS) at Univ. Politècnica de Catalunya (UPC)}
                  {September 2018}{may 2019}{discontinued}
                  {Double degree programme offered by CFIS in Mathematics and Data Science. The study of mathematics \& computer science has been continued at the University of Glasgow.}
-                 
-     \\
+\end{twocol}
      
-     \cvsectiontitle{Software skills} &
+\begin{twocol}
+     \cvsectiontitle{Software\\skills}
+     
+     \switchcolumn
+     
      \cvsectionrule\newline
      \begin{tabular}{p{4cm}|p{6cm}}
           \textbf{Language/Technology} & \textbf{Skill level}
           \cvsoftwareskills
      \end{tabular}
-%
-    \\
-%    
-    \cvsectiontitle{Courses} &
-    \cvsectionrule
+\end{twocol}
+
+\begin{twocol}
+    \cvsectiontitle{Courses}
     
+    \switchcolumn
+    
+    \cvsectionrule
     \cvchronoitem{MESIO Summer School 2019}
                  {Univ. Politèc. de Catalunya - Univ. de Barcelona}
                  {June}{July 2019}
@@ -181,10 +224,13 @@
      {Fundació Catalunya - La Pedrera}
      {June 2016}{June 2018}{}
      {Two-year scholarship awarded to 50 Catalan students with a high scientific vocation that includes first-hand participation in research.}
+\end{twocol}
+
+\begin{twocol}
+     \cvsectiontitle{Projects}
      
-     \\
+     \switchcolumn
      
-     \cvsectiontitle{Projects} &
      \cvsectionrule
      
      \cvchronoitem{Analysing and visualising chord sequences in music}
@@ -203,18 +249,31 @@
       {}
       {May}{December 2017}{archived}
       {Research project for the last year of secondary education (“Treball de Recerca”) on a protein found in the chromosomes of most eukaryotic organisms.}
+\end{twocol}
+
+\begin{twocol}
+     \cvsectiontitle{Languages}
      
-     \\
+     \switchcolumn
      
-     \cvsectiontitle{Languages} &
+     \cvsectionrule\newline
+     \begin{tabular}{l|l}
+         \large \textbf{Language}  & \textbf{Skill level}
+         \cvlanguages
+     \end{tabular}
+\end{twocol}
+
+\begin{twocol}
+     \cvsectiontitle{Musical education}
+     
+     \switchcolumn
+     
      \cvsectionrule
-     
-     \\
-     
-     \cvsectiontitle{Musical education} &
-     \cvsectionrule
-    
-\end{longtabu}
+     \cvchronoitem{\textbf{``Grau Professional de Música''}}
+     {``Victòria dels Àngels'' Municipal Music School}
+     {october 2010}{june 2018}{}
+     {[Junior] conservatoire music education with cello as main instrument.}
+\end{twocol}
 
 \end{document}
 
