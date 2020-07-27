@@ -80,9 +80,18 @@
 % ---------- FORMATTING ----------
 \makeatletter
 
-\newcommand{\www}[1]{\href{http://#1}{#1}}
+% --- UTILITIES ---
 \newcommand{\ifnn}[2]{\ifthenelse{\equal{#1}{}}{}{#2}}
+\newcommand{\showlink}[2][https]{\href{#1:#2}{#2}}
 
+% --- CONTACT INFO ---
+\newcommand{\rendercvemail}{\href{mailto:\cvemail}{\cvemail}}
+\newcommand{\rendercvphone}{\textcolor{myorange}{\cvphone}}
+\newcommand{\rendercvlinkedin}{\showlink{linkedin.com/in/\cvlinkedin/}}
+\newcommand{\rendercvgithub}{\showlink{github.com/\cvgithub}}
+\newcommand{\rendercvstackoverflow}{\showlink{stackoverflow.com/story/\cvstackoverflow}}
+
+% --- SECTIONS ---
 \newcommand{\cvsectiontitle}[1]{
     \rule{5mm}{1mm}\vspace{2mm}
     \section*{\Large\bfseries #1}
@@ -123,14 +132,16 @@
 \newcommand{\cvphone}{+34 634412833}
 \newcommand{\cvlinkedin}{PaoloLammens}
 \newcommand{\cvgithub}{plammens}
+\newcommand{\cvstackoverflow}{plammens}
 
 \newcommand{\cvaboutme}{Mathematics student with an interest in software development, music, and machine learning.}
 
 \addcvsoftwareskill{Python}{Fluent}
 \addcvsoftwareskill{C++}{Intermediate}
 \addcvsoftwareskill{Java}{Intermediate}
-\addcvsoftwareskill{\LaTeX{}}{Lower intermediate}
+\addcvsoftwareskill{Django}{Lower Intermediate}
 \addcvsoftwareskill{Git}{Advanced}
+\addcvsoftwareskill{\LaTeX{}}{Lower intermediate}
 
 
 \addcvlanguage{English}{CEFR C1 (\textit{Cambridge Advanced English certificate})}
@@ -151,10 +162,9 @@
     
     {\setlength{\tabcolsep}{0pt}
     \begin{tabular}{p{8mm}p{6cm}p{8mm}p{4cm}}%
-        \icon{@} & \href{mailto:\cvemail}{\cvemail} &
-        \Large\icon{\Telefon} & \textcolor{myorange}{\cvphone}\\
-        \icon{\faLinkedin} & \href{https://linkedin.com/in/\cvlinkedin/}{linkedin.com/in/\cvlinkedin} &
-        \icon{\faGithub} & \href{https://github.com/\cvgithub}{github.com/\cvgithub}
+        \icon{@} & \rendercvemail & \icon{\faGithub} & \rendercvgithub \\
+        \Large\icon{\Telefon} & \rendercvphone & \icon{\faStackOverflow} & \rendercvstackoverflow \\
+        \icon{\faLinkedin} & \rendercvlinkedin & &
     \end{tabular}}
     \vspace*{10pt}\newline
     \subsection*{About me}
@@ -184,8 +194,8 @@
      \switchcolumn
      
      \cvsectionrule\newline
-     \begin{tabular}{p{4cm}|p{6cm}}
-          \textbf{Language/Technology} & \textbf{Skill level}
+     \begin{tabular}{p{3cm}|p{6cm}}
+          \large \textbf{Technology} & \large \textbf{Skill level}
           \cvsoftwareskills
      \end{tabular}
 \end{twocol}
@@ -237,12 +247,12 @@
                   {}
                   {July 2018}{}{archived}
                   {This is the project developed as part of my stay at Wolfram High School Summer Camp. It involved creating a Mathematica script/application that analyses the harmony in music pieces and displays it as a transition graph.
-                  Link: \www{community.wolfram.com/groups/-/m/t/1383630}}
+                  Link: \showlink{community.wolfram.com/groups/-/m/t/1383630}}
       \smallskip
       \cvchronoitem{PySimplex}
       {}
       {November 2018}{}{archived}
-      {Simple Python implementation of the primal simplex algorithm in linear optimization. Based on university coursework from the Mathematical Programming course. Link: \www{github.com/plammens/PySimplex}}
+      {Simple Python implementation of the primal simplex algorithm in linear optimization. Based on university coursework from the Mathematical Programming course. Link: \showlink{github.com/plammens/PySimplex}}
       
       \smallskip
       \cvchronoitem{CENP-C -- Study of a protein}
@@ -258,7 +268,7 @@
      
      \cvsectionrule\newline
      \begin{tabular}{l|l}
-         \large \textbf{Language}  & \textbf{Skill level}
+         \large \textbf{Language}  & \large \textbf{Skill level}
          \cvlanguages
      \end{tabular}
 \end{twocol}
