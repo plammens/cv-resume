@@ -218,7 +218,7 @@
 \givenaboutme
 
 
-\profilesection{Skill}{5cm}
+\profilesection{Skills}{4.65cm}
 \givenskill
 \giventextskill
 \noindent
