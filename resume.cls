@@ -109,6 +109,7 @@
 \newcommand{\cvname}[1]{\renewcommand{\givencvname}{#1}}
 \newcommand{\cvjobtitle}[1]{\renewcommand{\givencvjobtitle}{#1}}
 \newcommand{\cvgithub}[1]{\renewcommand{\givencvgithub}{#1}}
+\newcommand{\cvstackoverflow}[1]{\renewcommand{\givencvstackoverflow}{#1}}
 \newcommand{\cvlinkedin}[1]{\renewcommand{\givencvlinkedin}{#1}}
 
 \newcommand{\givencvname}{REQUIRED!}
@@ -121,6 +122,7 @@
 \newcommand{\givencvsite}{}
 \newcommand{\givencvjobtitle}{}
 \newcommand{\givencvgithub}{}
+\newcommand{\givencvstackoverflow}{}
 \newcommand{\givencvlinkedin}{}
 
 
@@ -183,7 +185,7 @@
 \newcommand{\makeprofile}
 {
 \begin{tikzpicture}[remember picture,overlay]
-   	 \node [rectangle, fill=asidecolor, anchor=north, minimum width=9.90cm, minimum height=\paperheight+1cm] (box) at (-5cm,0.5cm){};
+   	 \node [rectangle, fill=asidecolor, anchor=north, minimum width=10.2cm, minimum height=\paperheight+1cm] (box) at (-5cm,0.5cm){};
 \end{tikzpicture}
 
 
@@ -208,6 +210,7 @@
 \ifthenelse{\equal{\givencvsite}{}}{}{\textsc{\Large\icon{\Mundus}} & \href{\givencvsite}{\textcolor{cerulean}\givencvsite}\\}
 \ifthenelse{\equal{\givencvlinkedin}{}}{}{\textsc{\Large\icon{\faLinkedin}} & \href{https://\givencvlinkedin}{\textcolor{cerulean}\givencvlinkedin}\\}
 \ifthenelse{\equal{\givencvgithub}{}}{}{\textsc{\Large\icon{\faGithub}} & \href{https://\givencvgithub}{\textcolor{cerulean}\givencvgithub}\\}
+\ifthenelse{\equal{\givencvstackoverflow}{}}{}{\textsc{\Large\icon{\faStackOverflow}} & \href{https://\givencvstackoverflow}{\textcolor{cerulean}\givencvstackoverflow}\\}
 \end{tabular}
 
 
