@@ -100,10 +100,10 @@
 \newcommand{\cvsectionrule}{\rule{\columnwidth}{0.5mm}\vspace*{5pt}}
 
 \newcommand{\cvchronoitem}[6]{
-    {\raggedright\textbf{#1}\ifnn{#2}{ -- #2}\par}
-    \textcolor{myorange}{\small\uppercase{#3 \ifnn{#4}{-- #4} \ifnn{#5}{$\,|\,$ #5}}}
-    \medskip\par
-    {\setstretch{0.9}\small #6 \par}
+    {\raggedright\textbf{\ignorespaces#1}\ifnn{#2}{ -- #2}\par}%
+    {\textcolor{myorange}{\small\uppercase{\ignorespaces#3 \ifnn{#4}{-- #4} \ifnn{#5}{$\,|\,$ #5}}}%
+     \medskip\par}%
+    {\setstretch{0.9}\small #6 \par}%
 }
 
 \newcommand{\cvsoftwareskills}{}

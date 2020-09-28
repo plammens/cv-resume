@@ -15,9 +15,9 @@ FORMATS = ["cv", "resume"]
 TEX_TEMPLATES = {
     "education": {
         "cv": r"""\cvchronoitem
-{{ \textbf{{ {degree} {title} }} }}
+{{ {degree} {title} }}
 {{ {institution} }}
-{{{start-date} }}
+{{ {start-date} }}
 {{ {end-date} }}
 {{ {comment} }}
 {{ {description} \textit{{ {grade[type]}: {grade[value]} }} }}
