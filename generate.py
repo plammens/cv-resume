@@ -104,7 +104,12 @@ def generate_education_items(source_dir="modules/education-items"):
             template = TEX_TEMPLATES["education"][fmt]
             fields = locals()[f"format_fields_{fmt}"](data)
             tex = template.format(**fields)
-            save_tex(tex, name, os.path.join(ROOT_OUTPUT_PATH, fmt, "education"))
+            save_tex(
+                tex,
+                type_name=f"{fmt} TeX",
+                name=name,
+                output_dir=os.path.join(ROOT_OUTPUT_PATH, fmt, "education"),
+            )
 
 
 def parse_date(date: str) -> Union[MonthDate, str]:
@@ -126,15 +131,22 @@ def ensure_output_dir(path=ROOT_OUTPUT_PATH):
     return path
 
 
-def save_output(save_func, output_dir, output_name, identifiers, file_extension):
-    # type: (Callable[[str], None], str, str, Sequence[str], str) -> None
+def save_output(
+    save_func: Callable[[str], None],
+    output_dir: str,
+    output_name: str,
+    identifiers: Sequence[str],
+    file_extension: str,
+    include_output_name: bool = False,
+) -> None:
     """Greatest common denominator for output saving functions"""
-    fname = "-".join(
-        x.replace(" ", "_") for x in itt.chain([output_name], identifiers) if x
-    )
+    components = list(identifiers)
+    if include_output_name:
+        components.insert(0, output_name)
+    name = "-".join(x.replace(" ", "_") for x in components if x)
     file_extension = file_extension.lstrip(".")
-    full_fname = "{}.{}".format(fname, file_extension)
-    path = os.path.join(output_dir, full_fname)
+    filename = "{}.{}".format(name, file_extension)
+    path = os.path.join(output_dir, filename)
 
     message = " ".join(
         [
@@ -148,7 +160,7 @@ def save_output(save_func, output_dir, output_name, identifiers, file_extension)
     save_func(path)
 
 
-def save_tex(tex: str, name: str, output_dir=ROOT_OUTPUT_PATH):
+def save_tex(tex: str, type_name: str, name: str, output_dir=ROOT_OUTPUT_PATH):
     def save_func(path):
         with open(path, "w") as f:
             f.write(tex)
@@ -156,7 +168,7 @@ def save_tex(tex: str, name: str, output_dir=ROOT_OUTPUT_PATH):
     save_output(
         save_func,
         output_dir=output_dir,
-        output_name="",
+        output_name=type_name,
         identifiers=(name,),
         file_extension=".tex",
     )
