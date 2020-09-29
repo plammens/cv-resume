@@ -1,16 +1,16 @@
 import argparse
 import calendar
-import datetime
-import itertools as itt
 import logging
 import os
+from abc import ABCMeta, abstractmethod
 from collections import namedtuple
 from typing import *
+from typing import Dict
 
 import yaml
 
-ROOT_OUTPUT_PATH = os.path.abspath("generated")
 
+ROOT_OUTPUT_PATH = os.path.abspath("generated")
 FORMATS = ["cv", "resume"]
 # fmt: off
 TEX_TEMPLATES = {
@@ -36,22 +36,99 @@ r"""
     }
 }
 # fmt: on
+DATE_FIELDS = ["start-date", "end-date"]
 
 logger = logging.getLogger()
 
+# utility types
 MonthDate = namedtuple("Date", ["year", "month"])
 
+# type aliases
+Data = Dict[str, Any]
+FormattedFields = Dict[str, str]
+Parser = Callable[[Data], Data]
+Formatter = Callable[[Data], FormattedFields]
 
-def generate_education_items(source_dir="modules/education-items"):
-    date_fields = ["start-date", "end-date"]
 
-    def parse_fields(data):
+class AbstractTexModuleGenerator(metaclass=ABCMeta):
+    def __init__(self, item_type: str, formatters: Dict[str, Formatter]):
+        self.module_type = item_type
+        self.formatters = formatters
+
+    @abstractmethod
+    def read(self, source):
+        pass
+
+    @abstractmethod
+    def parse(self, data: Data) -> Data:
+        pass
+
+    @abstractmethod
+    def generate(self, parsed_data: Data) -> Dict[str, str]:
+        pass
+
+    @abstractmethod
+    def save(self, generated_tex: str, *, name: str, fmt: str):
+        pass
+
+
+class YamlTexModuleGenerator(AbstractTexModuleGenerator, metaclass=ABCMeta):
+    def __init__(
+        self,
+        item_type: str,
+        formatters: Dict[str, Formatter],
+        root_output_dir: str = ROOT_OUTPUT_PATH,
+    ):
+        super().__init__(item_type, formatters)
+        self.root_output_path = root_output_dir
+
+    def read(self, source):
+        return yaml.full_load(source)
+
+    def generate(self, parsed_data: Data) -> Dict[str, str]:
+        outputs = {}
+        for fmt, formatter in self.formatters.items():
+            template = TEX_TEMPLATES[self.module_type][fmt]
+            tex = template.format(**formatter(parsed_data))
+            outputs[fmt] = tex
+        return outputs
+
+    def save(self, generated_tex: str, *, name: str, fmt: str):
+        save_tex(
+            generated_tex,
+            type_name=f"{fmt} TeX",
+            name=name,
+            output_dir=os.path.join(ROOT_OUTPUT_PATH, fmt, self.module_type),
+        )
+
+    def generate_all(self, source_dir: str) -> None:
+        for file_name in os.listdir(source_dir):
+            path = os.path.join(source_dir, file_name)
+            name = file_name.rsplit(".")[0]
+
+            logger.debug("Processing %s (%s)", name, path)
+            with open(path) as f:
+                data = self.parse(self.read(f))
+            outputs = self.generate(data)
+
+            for fmt, tex in outputs.items():
+                self.save(tex, name=name, fmt=fmt)
+
+
+class EducationItemGenerator(YamlTexModuleGenerator):
+    def __init__(self):
+        item_type = "education"
+        formatters = {"cv": self.format_fields_cv, "resume": self.format_fields_resume}
+        super().__init__(item_type, formatters)
+
+    def parse(self, data: Data) -> Data:
         parsed = data.copy()
-        for date_field in date_fields:
+        for date_field in DATE_FIELDS:
             parsed[date_field] = parse_date(data[date_field])
         return parsed
 
-    def format_fields_cv(data):
+    @staticmethod
+    def format_fields_cv(data: Data) -> FormattedFields:
         formatted = data.copy()
 
         comment = data["comment"]
@@ -61,7 +138,7 @@ def generate_education_items(source_dir="modules/education-items"):
             else f"{comment['other']}"
         )
 
-        for date_field in date_fields:
+        for date_field in DATE_FIELDS:
             date = data[date_field]
             formatted[date_field] = (
                 f"{calendar.month_name[date.month]} {date.year}"
@@ -71,7 +148,8 @@ def generate_education_items(source_dir="modules/education-items"):
 
         return formatted
 
-    def format_fields_resume(data):
+    @staticmethod
+    def format_fields_resume(data: Data) -> FormattedFields:
         formatted = data.copy()
 
         comment = data["comment"]
@@ -89,7 +167,7 @@ def generate_education_items(source_dir="modules/education-items"):
             else institution
         )
 
-        for date_field in date_fields:
+        for date_field in DATE_FIELDS:
             date = data[date_field]
             formatted[date_field] = (
                 f"{calendar.month_name[date.month][:3]} {date.year}"
@@ -98,24 +176,6 @@ def generate_education_items(source_dir="modules/education-items"):
             )
 
         return formatted
-
-    for file_name in os.listdir(source_dir):
-        path = os.path.join(source_dir, file_name)
-        name = file_name.rsplit(".")[0]
-        logger.debug("Processing %s (%s)", name, path)
-        with open(path) as f:
-            data = parse_fields(yaml.full_load(f))
-
-        for fmt in FORMATS:
-            template = TEX_TEMPLATES["education"][fmt]
-            fields = locals()[f"format_fields_{fmt}"](data)
-            tex = template.format(**fields)
-            save_tex(
-                tex,
-                type_name=f"{fmt} TeX",
-                name=name,
-                output_dir=os.path.join(ROOT_OUTPUT_PATH, fmt, "education"),
-            )
 
 
 def parse_date(date: str) -> Union[MonthDate, str]:
@@ -205,7 +265,8 @@ def setup_logging(level):
 def main(**kwargs):
     setup_logging(kwargs.get("logging_level", logging.INFO))
 
-    generate_education_items()
+    gen = EducationItemGenerator()
+    gen.generate_all("modules/education-items")
 
 
 def define_cli():
