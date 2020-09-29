@@ -12,9 +12,12 @@ import yaml
 ROOT_OUTPUT_PATH = os.path.abspath("generated")
 
 FORMATS = ["cv", "resume"]
+# fmt: off
 TEX_TEMPLATES = {
     "education": {
-        "cv": r"""\cvchronoitem
+        "cv": \
+r"""
+\cvchronoitem
 {{ {degree} {title} }}
 {{ {institution} }}
 {{ {start-date} }}
@@ -22,7 +25,9 @@ TEX_TEMPLATES = {
 {{ {comment} }}
 {{ {description} \textit{{ {grade[type]}: {grade[value]} }} }}
 """,
-        "resume": r"""\twentyitem
+        "resume": \
+r"""
+\twentyitem
 {{ \noindent {start-date} - \\ {end-date} \\({comment}) }}
 {{ {degree} {title} }}
 {{ {institution} }}
@@ -30,6 +35,7 @@ TEX_TEMPLATES = {
 """,
     }
 }
+# fmt: on
 
 logger = logging.getLogger()
 
