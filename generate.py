@@ -33,7 +33,20 @@ r"""
 {{ {institution} }}
 {{ {description} \textit{{ GPA: 19 (out of 22) }} }}
 """,
-    }
+    },
+    "work": {
+        "cv": \
+r"""
+\cvchronoitem
+{{ {job-title} }}
+{{ {company} }}
+{{ {start-date} }}
+{{ {end-date} }}
+{{ {comment} }}
+{{ {description} }}
+""",
+        "resume": None,
+    },
 }
 # fmt: on
 DATE_FIELDS = ["start-date", "end-date"]
@@ -131,6 +144,8 @@ class EducationItemGenerator(YamlTexModuleGenerator):
     def format_fields_cv(data: Data) -> FormattedFields:
         formatted = data.copy()
 
+        formatted["degree"] = format_optional(data["degree"])
+
         comment = data["comment"]
         formatted["comment"] = (
             f"Expected graduation: {comment['expected-end-date']}"
@@ -139,18 +154,15 @@ class EducationItemGenerator(YamlTexModuleGenerator):
         )
 
         for date_field in DATE_FIELDS:
-            date = data[date_field]
-            formatted[date_field] = (
-                f"{calendar.month_name[date.month]} {date.year}"
-                if isinstance(date, MonthDate)
-                else date
-            )
+            formatted[date_field] = format_date_long(data[date_field])
 
         return formatted
 
     @staticmethod
     def format_fields_resume(data: Data) -> FormattedFields:
         formatted = data.copy()
+
+        formatted["degree"] = format_optional(data["degree"])
 
         comment = data["comment"]
         formatted["comment"] = (
@@ -168,12 +180,41 @@ class EducationItemGenerator(YamlTexModuleGenerator):
         )
 
         for date_field in DATE_FIELDS:
-            date = data[date_field]
-            formatted[date_field] = (
-                f"{calendar.month_name[date.month][:3]} {date.year}"
-                if isinstance(date, MonthDate)
-                else date
-            )
+            formatted[date_field] = format_date_short(data[date_field])
+
+        return formatted
+
+class WorkItemGenerator(YamlTexModuleGenerator):
+    def __init__(self):
+        item_type = "work"
+        formatters = {"cv": self.format_fields_cv, "resume": self.format_fields_resume}
+        super().__init__(item_type, formatters)
+
+    def parse(self, data: Data) -> Data:
+        parsed = data.copy()
+        for date_field in DATE_FIELDS:
+            parsed[date_field] = parse_date(data[date_field])
+        return parsed
+
+    @staticmethod
+    def format_fields_cv(data: Data) -> FormattedFields:
+        formatted = data.copy()
+
+        formatted["comment"] = format_optional(data["comment"])
+
+        for date_field in DATE_FIELDS:
+            formatted[date_field] = format_date_long(data[date_field])
+
+        return formatted
+
+    @staticmethod
+    def format_fields_resume(data: Data) -> FormattedFields:
+        formatted = data.copy()
+
+        formatted["optional"] = format_optional(data["comment"])
+
+        for date_field in DATE_FIELDS:
+            formatted[date_field] = format_date_short(data[date_field])
 
         return formatted
 
@@ -186,6 +227,26 @@ def parse_date(date: str) -> Union[MonthDate, str]:
         return MonthDate(year, month)
     except ValueError:
         return date
+
+
+def format_date_long(date):
+    return (
+        f"{calendar.month_name[date.month]} {date.year}"
+        if isinstance(date, MonthDate)
+        else date
+    )
+
+
+def format_date_short(date):
+    return (
+        f"{calendar.month_name[date.month][:3]} {date.year}"
+        if isinstance(date, MonthDate)
+        else date
+    )
+
+
+def format_optional(optional):
+    return optional if optional else ""
 
 
 def ensure_output_dir(path=ROOT_OUTPUT_PATH):
