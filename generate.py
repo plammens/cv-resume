@@ -5,7 +5,7 @@ import os
 from abc import ABCMeta, abstractmethod
 from collections import defaultdict, namedtuple
 from typing import *
-from typing import Dict
+from typing import IO
 
 import yaml
 
@@ -77,7 +77,7 @@ class AbstractTexModuleGenerator(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def generate(self, parsed_data: Data) -> Dict[str, str]:
+    def generate(self, parsed_data: Data, fmt: str) -> str:
         pass
 
     @abstractmethod
@@ -107,13 +107,15 @@ class FileToFileGenerator(AbstractTexModuleGenerator, metaclass=ABCMeta):
         for file_name in os.listdir(source_dir):
             path = os.path.join(source_dir, file_name)
             name = file_name.rsplit(".")[0]
+            if not os.path.isfile(path):
+                continue
 
             logger.debug("Processing %s (%s)", name, path)
             with open(path) as f:
                 data = self.parse(self.read(f))
-            outputs = self.generate(data)
 
-            for fmt, tex in outputs.items():
+            for fmt in self.formatters:
+                tex = self.generate(data, fmt)
                 self.save(tex, name=name, fmt=fmt)
 
 
@@ -130,13 +132,11 @@ class YamlTexModuleGenerator(FileToFileGenerator, metaclass=ABCMeta):
     def read(self, source):
         return yaml.full_load(source)
 
-    def generate(self, parsed_data: Data) -> Dict[str, str]:
-        outputs = {}
-        for fmt, formatter in self.formatters.items():
-            template = TEX_TEMPLATES[self.module_type][fmt]
-            tex = template.format(**formatter(parsed_data))
-            outputs[fmt] = tex
-        return outputs
+    def generate(self, parsed_data: Data, fmt: str) -> str:
+        formatter = self.formatters[fmt]
+        template = TEX_TEMPLATES[self.module_type][fmt]
+        tex = template.format(**formatter(parsed_data))
+        return tex
 
 
 class EducationItemGenerator(YamlTexModuleGenerator):
@@ -186,7 +186,7 @@ class EducationItemGenerator(YamlTexModuleGenerator):
         formatted["institution"] = (
             rf" \newline {institution}"
             if len(data["degree"]) + len(data["title"]) + len(institution) > 55
-               and len(institution) < 30
+            and len(institution) < 30
             else institution
         )
 
