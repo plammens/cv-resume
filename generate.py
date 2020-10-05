@@ -3,7 +3,7 @@ import calendar
 import logging
 import os
 from abc import ABCMeta, abstractmethod
-from collections import namedtuple
+from collections import defaultdict, namedtuple
 from typing import *
 from typing import Dict
 
@@ -64,12 +64,12 @@ Formatter = Callable[[Data], FormattedFields]
 
 
 class AbstractTexModuleGenerator(metaclass=ABCMeta):
-    def __init__(self, item_type: str, formatters: Dict[str, Formatter]):
-        self.module_type = item_type
+    def __init__(self, module_type: str, formatters: Dict[str, Formatter]):
+        self.module_type = module_type
         self.formatters = formatters
 
     @abstractmethod
-    def read(self, source):
+    def read(self, source: IO) -> Data:
         pass
 
     @abstractmethod
@@ -85,33 +85,22 @@ class AbstractTexModuleGenerator(metaclass=ABCMeta):
         pass
 
 
-class YamlTexModuleGenerator(AbstractTexModuleGenerator, metaclass=ABCMeta):
+class FileToFileGenerator(AbstractTexModuleGenerator, metaclass=ABCMeta):
     def __init__(
         self,
-        item_type: str,
+        module_type: str,
         formatters: Dict[str, Formatter],
-        root_output_dir: str = ROOT_OUTPUT_PATH,
+        subdir: Optional[str] = None,
     ):
-        super().__init__(item_type, formatters)
-        self.root_output_path = root_output_dir
-
-    def read(self, source):
-        return yaml.full_load(source)
-
-    def generate(self, parsed_data: Data) -> Dict[str, str]:
-        outputs = {}
-        for fmt, formatter in self.formatters.items():
-            template = TEX_TEMPLATES[self.module_type][fmt]
-            tex = template.format(**formatter(parsed_data))
-            outputs[fmt] = tex
-        return outputs
+        super().__init__(module_type, formatters)
+        self.subdir = subdir or self.module_type
 
     def save(self, generated_tex: str, *, name: str, fmt: str):
         save_tex(
             generated_tex,
             type_name=f"{fmt} TeX",
             name=name,
-            output_dir=os.path.join(ROOT_OUTPUT_PATH, fmt, self.module_type),
+            output_dir=os.path.join(ROOT_OUTPUT_PATH, fmt, self.subdir),
         )
 
     def generate_all(self, source_dir: str) -> None:
@@ -126,6 +115,28 @@ class YamlTexModuleGenerator(AbstractTexModuleGenerator, metaclass=ABCMeta):
 
             for fmt, tex in outputs.items():
                 self.save(tex, name=name, fmt=fmt)
+
+
+class YamlTexModuleGenerator(FileToFileGenerator, metaclass=ABCMeta):
+    def __init__(
+        self,
+        module_type: str,
+        formatters: Dict[str, Formatter],
+        root_output_dir: str = ROOT_OUTPUT_PATH,
+    ):
+        super().__init__(module_type, formatters)
+        self.root_output_path = root_output_dir
+
+    def read(self, source):
+        return yaml.full_load(source)
+
+    def generate(self, parsed_data: Data) -> Dict[str, str]:
+        outputs = {}
+        for fmt, formatter in self.formatters.items():
+            template = TEX_TEMPLATES[self.module_type][fmt]
+            tex = template.format(**formatter(parsed_data))
+            outputs[fmt] = tex
+        return outputs
 
 
 class EducationItemGenerator(YamlTexModuleGenerator):
@@ -175,7 +186,7 @@ class EducationItemGenerator(YamlTexModuleGenerator):
         formatted["institution"] = (
             rf" \newline {institution}"
             if len(data["degree"]) + len(data["title"]) + len(institution) > 55
-            and len(institution) < 30
+               and len(institution) < 30
             else institution
         )
 
@@ -183,6 +194,7 @@ class EducationItemGenerator(YamlTexModuleGenerator):
             formatted[date_field] = format_date_short(data[date_field])
 
         return formatted
+
 
 class WorkItemGenerator(YamlTexModuleGenerator):
     def __init__(self):
