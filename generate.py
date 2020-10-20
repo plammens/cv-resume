@@ -231,6 +231,23 @@ class WorkItemGenerator(YamlTexModuleGenerator):
         return formatted
 
 
+class TexIdentityGenerator(FileToFileGenerator):
+    def __init__(
+        self, module_type: str, subdir: Optional[str] = None,
+    ):
+        formatters = {key: lambda x: x for key in FORMATS}
+        super().__init__(module_type, formatters, subdir)
+
+    def read(self, source: IO) -> Data:
+        return {"tex": source.read()}
+
+    def parse(self, data: Data) -> Data:
+        return data
+
+    def generate(self, parsed_data: Data, fmt: str) -> str:
+        return parsed_data["tex"]
+
+
 def parse_date(date: str) -> Union[MonthDate, str]:
     try:
         month, year = date.split()
@@ -338,8 +355,8 @@ def setup_logging(level):
 def main(**kwargs):
     setup_logging(kwargs.get("logging_level", logging.INFO))
 
-    gen = EducationItemGenerator()
-    gen.generate_all("modules/education-items")
+    EducationItemGenerator().generate_all("modules/education-items")
+    TexIdentityGenerator("toplevel", subdir="").generate_all("modules")
 
 
 def define_cli():
