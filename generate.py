@@ -103,20 +103,21 @@ class FileToFileGenerator(AbstractTexModuleGenerator, metaclass=ABCMeta):
             output_dir=os.path.join(ROOT_OUTPUT_PATH, fmt, self.subdir),
         )
 
-    def generate_all(self, source_dir: str) -> None:
+    def generate_file(self, path):
+        """Generate single file"""
+        name = os.path.basename(path).rsplit(".")[0]
+        logger.debug("Processing %s (%s)", name, path)
+        with open(path) as f:
+            data = self.parse(self.read(f))
+        for fmt in self.formatters:
+            tex = self.generate(data, fmt)
+            self.save(tex, name=name, fmt=fmt)
+
+    def generate_dir(self, source_dir: str) -> None:
+        """Generate all files in a directory"""
         for file_name in os.listdir(source_dir):
-            path = os.path.join(source_dir, file_name)
-            name = file_name.rsplit(".")[0]
-            if not os.path.isfile(path):
-                continue
-
-            logger.debug("Processing %s (%s)", name, path)
-            with open(path) as f:
-                data = self.parse(self.read(f))
-
-            for fmt in self.formatters:
-                tex = self.generate(data, fmt)
-                self.save(tex, name=name, fmt=fmt)
+            if os.path.isfile(path := os.path.join(source_dir, file_name)):
+                self.generate_file(path)
 
 
 class YamlTexModuleGenerator(FileToFileGenerator, metaclass=ABCMeta):
@@ -363,8 +364,8 @@ def setup_logging(level):
 def main(**kwargs):
     setup_logging(kwargs.get("logging_level", logging.INFO))
 
-    EducationItemGenerator().generate_all("modules/education-items")
-    TexIdentityGenerator("toplevel", subdir="").generate_all("modules")
+    EducationItemGenerator().generate_dir("modules/education-items")
+    TexIdentityGenerator("toplevel", subdir="").generate_dir("modules")
 
 
 def define_cli():
