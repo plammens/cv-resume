@@ -135,8 +135,16 @@ class YamlTexModuleGenerator(FileToFileGenerator, metaclass=ABCMeta):
     def generate(self, parsed_data: Data, fmt: str) -> str:
         formatter = self.formatters[fmt]
         template = TEX_TEMPLATES[self.module_type][fmt]
-        tex = template.format(**formatter(parsed_data))
+        tex = template.format(**formatter(self.format_base(parsed_data)))
         return tex
+
+    @staticmethod
+    def format_base(parsed_data: Data) -> FormattedFields:
+        formatted = parsed_data.copy()
+        for key, value in parsed_data.items():
+            if value is None:
+                formatted[key] = ""
+        return formatted
 
 
 class EducationItemGenerator(YamlTexModuleGenerator):
