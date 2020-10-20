@@ -27,8 +27,7 @@
 \cvstackoverflow{stackoverflow.com/story/plammens}
 
 
-\aboutme{
-Mathematics \& Computer Science student with attested interest in software development, music, and machine learning.}%About me section
+\aboutme{\input{generated/resume/toplevel/aboutme.tex}}%About me section
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%Skill bar section, each skill must have a value between 0 an 6 (float)%%%%%%%
@@ -88,16 +87,8 @@ Mathematics \& Computer Science student with attested interest in software devel
 
 \renewcommand{\twentylen}{\itemwidth}
 \begin{twenty}[\chronowidth]
-  \twentyitem
-    {\noindent Sep 2019 - \\ present \\(exp. 2022)}
-    {\large BSc (Hon.) Mathematics \& Computing Science}
-    {{} \newline University of Glasgow}
-    {Entered at Level 2. Activities \& Societies: HackerOlympics 2019, Chapel Choir, Kelvin Ensemble (First Year Representative). \textit{GPA: 19 (out of 22)}}
-  \twentyitem
-    {Sep 2018 -  \\Jun 2019}
-    {Mathematics \& Data Science (discontinued)}
-    {Centre de Formació Interdisciplinària Superior (CFIS) – Universitat Politècnica de Catalunya (UPC)}
-    {Double degree programme offered by CFIS in Mathematics and Data Science. The study of mathematics \& computer science has been continued at the University of Glasgow. \textit{Average grade: 8.12/10}}
+    \input{generated/resume/education/uofg.tex}
+    \input{generated/resume/education/cfis.tex}
 \end{twenty}
 
 

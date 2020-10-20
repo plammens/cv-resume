@@ -100,10 +100,10 @@
 \newcommand{\cvsectionrule}{\rule{\columnwidth}{0.5mm}\vspace*{5pt}}
 
 \newcommand{\cvchronoitem}[6]{
-    {\raggedright\textbf{#1}\ifnn{#2}{ -- #2}\par}
-    \textcolor{myorange}{\small\uppercase{#3 \ifnn{#4}{-- #4} \ifnn{#5}{$\,|\,$ #5}}}
-    \medskip\par
-    {\setstretch{0.9}\small #6 \par}
+    {\raggedright\textbf{\ignorespaces#1}\ifnn{#2}{ -- #2}\par}%
+    {\textcolor{myorange}{\small\uppercase{\ignorespaces#3 \ifnn{#4}{-- #4} \ifnn{#5}{$\,|\,$ #5}}}%
+     \medskip\par}%
+    {\setstretch{0.9}\small #6 \par}%
 }
 
 \newcommand{\cvsoftwareskills}{}
@@ -134,7 +134,7 @@
 \newcommand{\cvgithub}{plammens}
 \newcommand{\cvstackoverflow}{plammens}
 
-\newcommand{\cvaboutme}{Mathematics student with an interest in software development, music, and machine learning.}
+\newcommand{\cvaboutme}{\input{generated/cv/toplevel/aboutme.tex}}
 
 \addcvsoftwareskill{Python}{Fluent}
 \addcvsoftwareskill{C++}{Intermediate}
@@ -177,15 +177,9 @@
     \switchcolumn
     
     \cvsectionrule
-    \cvchronoitem{\textbf{BSc (Hon.) Mathematics \& Computing Science}}
-                 {University of Glasgow}
-                 {september 2019}{present}{expected graduation year: 2022}
-                 {Activities \& Societies: GU Tech Society, HackerOlympics 2019, Chapel Choir, Kelvin Ensemble, Dialectic Society, GU Debates. \textit{GPA: 19 (out of 22)}}
+    \input{generated/cv/education/uofg.tex}
     \bigskip
-    \cvchronoitem{\textbf{Mathematics \& Data Science}}
-                 {Centre de Formació Interdisciplinària Superior (CFIS) at Univ. Politècnica de Catalunya (UPC)}
-                 {September 2018}{may 2019}{discontinued}
-                 {Double degree programme offered by CFIS in Mathematics and Data Science. The study of mathematics \& computer science has been continued at the University of Glasgow. \textit{Average grade: 8.12/10}}
+    \input{generated/cv/education/cfis.tex}
 \end{twocol}
 
 
