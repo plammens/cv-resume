@@ -93,7 +93,7 @@ class FileToFileGenerator(AbstractTexModuleGenerator, metaclass=ABCMeta):
         subdir: Optional[str] = None,
     ):
         super().__init__(module_type, formatters)
-        self.subdir = subdir or self.module_type
+        self.subdir = subdir if subdir is not None else self.module_type
 
     def save(self, generated_tex: str, *, name: str, fmt: str):
         save_tex(
