@@ -121,15 +121,6 @@ class FileToFileGenerator(AbstractTexModuleGenerator, metaclass=ABCMeta):
 
 
 class YamlTexModuleGenerator(FileToFileGenerator, metaclass=ABCMeta):
-    def __init__(
-        self,
-        module_type: str,
-        formatters: Dict[str, Formatter],
-        root_output_dir: str = ROOT_OUTPUT_PATH,
-    ):
-        super().__init__(module_type, formatters)
-        self.root_output_path = root_output_dir
-
     def read(self, source):
         return yaml.full_load(source)
 
