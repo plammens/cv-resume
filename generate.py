@@ -47,6 +47,26 @@ r"""
 """,
         "resume": None,
     },
+    "contact-info": {
+        "cv": \
+r"""
+\newcommand{{\cvemail}}{{{email}}}
+\newcommand{{\cvphone}}{{{phone}}}
+\newcommand{{\cvlinkedin}}{{{linkedin}}}
+\newcommand{{\cvgithub}}{{{github}}}
+\newcommand{{\cvstackoverflow}}{{{stack-overflow}}}
+""",
+        "resume": \
+r"""
+\cvname{{{name}}}
+\cvjobtitle{{{job-title}}}
+\cvnumberphone{{{phone}}}
+\cvmail{{{email}}}
+\cvgithub{{github.com/{github}}}
+\cvlinkedin{{linkedin.com/in/{linkedin}}}
+\cvstackoverflow{{stackoverflow.com/story/{stack-overflow}}}
+""",
+    }
 }
 # fmt: on
 DATE_FIELDS = ["start-date", "end-date"]
@@ -137,6 +157,20 @@ class YamlTexModuleGenerator(FileToFileGenerator, metaclass=ABCMeta):
             if value is None:
                 formatted[key] = ""
         return formatted
+
+
+class ContactInfoGenerator(YamlTexModuleGenerator):
+    def __init__(self):
+        item_type = "contact-info"
+        formatters = {"cv": self.format_generic, "resume": self.format_generic}
+        super().__init__(item_type, formatters, subdir="")
+
+    def parse(self, data: Data) -> Data:
+        return data
+
+    @staticmethod
+    def format_generic(parsed_data: Data) -> FormattedFields:
+        return parsed_data.copy()
 
 
 class EducationItemGenerator(YamlTexModuleGenerator):
@@ -357,6 +391,7 @@ def main(**kwargs):
 
     EducationItemGenerator().generate_dir("modules/education-items")
     TexIdentityGenerator("toplevel", subdir="").generate_dir("modules")
+    ContactInfoGenerator().generate_file("modules/contact-info.yaml")
 
 
 def define_cli():
