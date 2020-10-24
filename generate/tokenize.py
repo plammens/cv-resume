@@ -2,8 +2,8 @@ import re
 from abc import ABCMeta, abstractmethod
 from typing import Callable, ClassVar, Dict, Sequence
 
-URL_SEARCH_PATTERN = re.compile(r"((?:http[s]://|mailto:)\S+)(?<!\W)")
-URL_PATTERN = re.compile(r"(?P<protocol>http[s]://|mailto:)(?P<address>\S+)")
+URL_SEARCH_PATTERN = re.compile(r"((?:https?://|mailto:)\S+)(?<!\W)")
+URL_PATTERN = re.compile(r"(?P<protocol>https?://|mailto:)(?P<address>\S+)")
 
 
 class Token(metaclass=ABCMeta):
