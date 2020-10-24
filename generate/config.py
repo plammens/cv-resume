@@ -37,7 +37,14 @@ r"""
 {{ {comment} }}
 {{ {description} }}
 """,
-        "resume": None,
+        "resume": \
+r"""
+\twentyitem
+{{\noindent {start-date} - \\ {end-date} }}
+{{ {job-title} }}
+{{ {company} }}
+{{ {description} }}
+""",
     },
     "contact-info": {
         "cv": \
