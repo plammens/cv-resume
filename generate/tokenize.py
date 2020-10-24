@@ -2,7 +2,7 @@ import re
 from abc import ABCMeta, abstractmethod
 from typing import Callable, ClassVar, Dict, Sequence
 
-URL_SEARCH_PATTERN = re.compile(r"((?:http[s]://|mailto:)\S+)")
+URL_SEARCH_PATTERN = re.compile(r"((?:http[s]://|mailto:)\S+)(?<!\W)")
 URL_PATTERN = re.compile(r"(?P<protocol>http[s]://|mailto:)(?P<address>\S+)")
 
 
