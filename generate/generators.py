@@ -1,8 +1,9 @@
 import datetime
+import functools
 import logging
 import os
 from abc import ABCMeta, abstractmethod
-from typing import Dict, IO, Optional
+from typing import Dict, IO, Optional, Sequence, Type
 
 import yaml
 
@@ -110,6 +111,34 @@ class YamlTexModuleGenerator(FileToFileGenerator, metaclass=ABCMeta):
             if value is None:
                 formatted[key] = ""
         return formatted
+
+
+def single_file_multiple_items(cls: Type[YamlTexModuleGenerator]):
+    """
+    Decorate a one-item-per-file generator into a multiple-items-per-file generator
+    """
+
+    class DecoratedClass(YamlTexModuleGenerator):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.wrapped_generator = cls(*args, **kwargs)
+
+        def parse(self, data: Sequence[Data]) -> Sequence[Data]:
+            return [self.wrapped_generator.parse(item) for item in data]
+
+        def generate(self, parsed_data: Sequence[Data], fmt: str) -> str:
+            return "\n".join(
+                self.wrapped_generator.generate(item, fmt) for item in parsed_data
+            )
+
+        def generate_dir(self, source_dir: str) -> None:
+            raise TypeError(f"{cls.__name__} is a single-file-multiple-items generator")
+
+    functools.update_wrapper(DecoratedClass, cls, updated=())
+    return DecoratedClass
+
+
+# ---------------- concrete subclasses -------------------
 
 
 class ContactInfoGenerator(YamlTexModuleGenerator):
