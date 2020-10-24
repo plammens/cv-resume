@@ -113,29 +113,39 @@ class YamlTexModuleGenerator(FileToFileGenerator, metaclass=ABCMeta):
         return formatted
 
 
-def single_file_multiple_items(cls: Type[YamlTexModuleGenerator]):
+def single_file_multiple_items(item_separator: str = "\n"):
     """
     Decorate a one-item-per-file generator into a multiple-items-per-file generator
+
+    The generated output consists of the concatenation of the generated output for
+    each individual item.
+
+    :param item_separator: text separator between each generated item
     """
 
-    class DecoratedClass(YamlTexModuleGenerator):
-        def __init__(self, *args, **kwargs):
-            super().__init__(*args, **kwargs)
-            self.wrapped_generator = cls(*args, **kwargs)
+    def decorator(cls: Type[YamlTexModuleGenerator]):
+        class DecoratedClass(YamlTexModuleGenerator):
+            def __init__(self, *args, **kwargs):
+                super().__init__(*args, **kwargs)
+                self.wrapped_generator = cls(*args, **kwargs)
 
-        def parse(self, data: Sequence[Data]) -> Sequence[Data]:
-            return [self.wrapped_generator.parse(item) for item in data]
+            def parse(self, data: Sequence[Data]) -> Sequence[Data]:
+                return [self.wrapped_generator.parse(item) for item in data]
 
-        def generate(self, parsed_data: Sequence[Data], fmt: str) -> str:
-            return "\n".join(
-                self.wrapped_generator.generate(item, fmt) for item in parsed_data
-            )
+            def generate(self, parsed_data: Sequence[Data], fmt: str) -> str:
+                return item_separator.join(
+                    self.wrapped_generator.generate(item, fmt) for item in parsed_data
+                )
 
-        def generate_dir(self, source_dir: str) -> None:
-            raise TypeError(f"{cls.__name__} is a single-file-multiple-items generator")
+            def generate_dir(self, source_dir: str) -> None:
+                raise TypeError(
+                    f"{cls.__name__} is a single-file-multiple-items generator"
+                )
 
-    functools.update_wrapper(DecoratedClass, cls, updated=())
-    return DecoratedClass
+        functools.update_wrapper(DecoratedClass, cls, updated=())
+        return DecoratedClass
+
+    return decorator
 
 
 # ---------------- concrete subclasses -------------------
