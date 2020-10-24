@@ -34,7 +34,7 @@ r"""
 {{ {company} }}
 {{ {start-date} }}
 {{ {end-date} }}
-{{ {comment} }}
+{{{comment}}}
 {{ {description} }}
 """,
         "resume": \
