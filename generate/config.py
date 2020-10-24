@@ -62,4 +62,5 @@ r"""
 }
 # fmt: on
 
-DATE_FIELDS = ["start-date", "end-date"]
+DATE_FIELDS = {"start-date", "end-date"}
+TEXT_FIELDS = {"description"}

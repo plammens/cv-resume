@@ -6,8 +6,9 @@ from typing import Dict, IO, Optional
 
 import yaml
 
-from .config import DATE_FIELDS, FORMATS, ROOT_OUTPUT_PATH, TEX_TEMPLATES
+from .config import DATE_FIELDS, FORMATS, ROOT_OUTPUT_PATH, TEXT_FIELDS, TEX_TEMPLATES
 from .save import save_tex
+from .tokenize import tokenize
 from .utils import (
     Data,
     FormattedFields,
@@ -92,9 +93,19 @@ class YamlTexModuleGenerator(FileToFileGenerator, metaclass=ABCMeta):
         tex = template.format(**formatter(self.format_base(parsed_data)))
         return tex
 
+    def parse(self, data: Data) -> Data:
+        parsed = data.copy()
+        fields = set(data.keys())
+        for date_field in DATE_FIELDS & fields:
+            parsed[date_field] = parse_date(data[date_field])
+        for text_field in TEXT_FIELDS & fields:
+            parsed[text_field] = tokenize(data[text_field])
+        return parsed
+
     @staticmethod
     def format_base(parsed_data: Data) -> FormattedFields:
         formatted = parsed_data.copy()
+        # replace None with empty string:
         for key, value in parsed_data.items():
             if value is None:
                 formatted[key] = ""
@@ -120,12 +131,6 @@ class EducationItemGenerator(YamlTexModuleGenerator):
         item_type = "education"
         formatters = {"cv": self.format_fields_cv, "resume": self.format_fields_resume}
         super().__init__(item_type, formatters)
-
-    def parse(self, data: Data) -> Data:
-        parsed = data.copy()
-        for date_field in DATE_FIELDS:
-            parsed[date_field] = parse_date(data[date_field])
-        return parsed
 
     @staticmethod
     def format_fields_cv(data: Data) -> FormattedFields:
@@ -177,12 +182,6 @@ class WorkItemGenerator(YamlTexModuleGenerator):
         item_type = "work"
         formatters = {"cv": self.format_fields_cv, "resume": self.format_fields_resume}
         super().__init__(item_type, formatters)
-
-    def parse(self, data: Data) -> Data:
-        parsed = data.copy()
-        for date_field in DATE_FIELDS:
-            parsed[date_field] = parse_date(data[date_field])
-        return parsed
 
     @staticmethod
     def format_fields_cv(data: Data) -> FormattedFields:
