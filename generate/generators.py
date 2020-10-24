@@ -3,7 +3,8 @@ import functools
 import logging
 import os
 from abc import ABCMeta, abstractmethod
-from typing import Dict, IO, Optional, Sequence, Type
+from collections import defaultdict
+from typing import Dict, IO, Optional, Sequence, Type, Union
 
 import yaml
 
@@ -113,15 +114,20 @@ class YamlTexModuleGenerator(FileToFileGenerator, metaclass=ABCMeta):
         return formatted
 
 
-def single_file_multiple_items(item_separator: str = "\n"):
+def single_file_multiple_items(item_separator: Union[str, Dict[str, str]] = "\n"):
     """
     Decorate a one-item-per-file generator into a multiple-items-per-file generator
 
     The generated output consists of the concatenation of the generated output for
     each individual item.
 
-    :param item_separator: text separator between each generated item
+    :param item_separator: text separator between each generated item. Can be either a
+                           string or a dictionary. If a string, use the same separator
+                           for all formats. If a dictionary, indicate a separator for
+                           each format.
     """
+    if isinstance(item_separator, str):
+        item_separator = defaultdict(lambda: item_separator)
 
     def decorator(cls: Type[YamlTexModuleGenerator]):
         class DecoratedClass(YamlTexModuleGenerator):
@@ -133,7 +139,8 @@ def single_file_multiple_items(item_separator: str = "\n"):
                 return [self.wrapped_generator.parse(item) for item in data]
 
             def generate(self, parsed_data: Sequence[Data], fmt: str) -> str:
-                return item_separator.join(
+                sep = item_separator[fmt]
+                return sep.join(
                     self.wrapped_generator.generate(item, fmt) for item in parsed_data
                 )
 
