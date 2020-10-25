@@ -136,7 +136,7 @@ def single_file_multiple_items(item_separator: Union[str, Dict[str, str]] = "\n"
                 super().__init__(
                     self.wrapped_generator.module_type,
                     self.wrapped_generator.formatters,
-                    self.wrapped_generator.subdir,
+                    subdir="",  # single file for all items
                 )
 
             def parse(self, data: Sequence[Data]) -> Sequence[Data]:
