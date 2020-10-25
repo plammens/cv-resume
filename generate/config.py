@@ -71,3 +71,4 @@ r"""
 
 DATE_FIELDS = {"start-date", "end-date"}
 TEXT_FIELDS = {"description"}
+ITEMS_FIELD = "items"

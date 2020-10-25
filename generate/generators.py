@@ -138,13 +138,17 @@ def single_file_multiple_items(item_separator: Union[str, Dict[str, str]] = "\n"
                     subdir="",  # single file for all items
                 )
 
-            def parse(self, data: Sequence[Data]) -> Sequence[Data]:
-                return [self.wrapped_generator.parse(item) for item in data]
+            def parse(self, data: Data) -> Data:
+                items = data[ITEMS_FIELD]
+                return {
+                    ITEMS_FIELD: [self.wrapped_generator.parse(item) for item in items]
+                }
 
-            def generate(self, parsed_data: Sequence[Data], fmt: str) -> str:
+            def generate(self, parsed_data: Data, fmt: str) -> str:
                 sep = item_separator[fmt]
+                items = parsed_data[ITEMS_FIELD]
                 return sep.join(
-                    self.wrapped_generator.generate(item, fmt) for item in parsed_data
+                    self.wrapped_generator.generate(item, fmt) for item in items
                 )
 
             def generate_dir(self, source_dir: str, **kwargs) -> None:
