@@ -132,8 +132,12 @@ def single_file_multiple_items(item_separator: Union[str, Dict[str, str]] = "\n"
     def decorator(cls: Type[YamlTexModuleGenerator]):
         class DecoratedClass(YamlTexModuleGenerator):
             def __init__(self, *args, **kwargs):
-                super().__init__(*args, **kwargs)
                 self.wrapped_generator = cls(*args, **kwargs)
+                super().__init__(
+                    self.wrapped_generator.module_type,
+                    self.wrapped_generator.formatters,
+                    self.wrapped_generator.subdir,
+                )
 
             def parse(self, data: Sequence[Data]) -> Sequence[Data]:
                 return [self.wrapped_generator.parse(item) for item in data]
