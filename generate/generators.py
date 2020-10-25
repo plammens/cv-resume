@@ -8,7 +8,8 @@ from typing import Dict, IO, Optional, Sequence, Type, Union
 
 import yaml
 
-from .config import DATE_FIELDS, FORMATS, ROOT_OUTPUT_PATH, TEXT_FIELDS, TEX_TEMPLATES
+from .config import DATE_FIELDS, FORMATS, ITEMS_FIELD, ROOT_OUTPUT_PATH, TEXT_FIELDS
+from .templates import TEX_TEMPLATES
 from .save import save_tex
 from .tokenize import tokenize
 from .utils import (
@@ -91,7 +92,7 @@ class YamlTexModuleGenerator(FileToFileGenerator, metaclass=ABCMeta):
     def generate(self, parsed_data: Data, fmt: str) -> str:
         formatter = self.formatters[fmt]
         template = TEX_TEMPLATES[self.module_type][fmt]
-        tex = template.format(**formatter(self.format_base(parsed_data)))
+        tex = template.fill(formatter(self.format_base(parsed_data)))
         return tex
 
     def parse(self, data: Data) -> Data:
@@ -113,53 +114,38 @@ class YamlTexModuleGenerator(FileToFileGenerator, metaclass=ABCMeta):
         return formatted
 
 
-def single_file_multiple_items(item_separator: Union[str, Dict[str, str]] = "\n"):
+def single_file_multiple_items(cls: Type[YamlTexModuleGenerator]):
     """
     Decorate a one-item-per-file generator into a multiple-items-per-file generator
 
     The generated output consists of the concatenation of the generated output for
     each individual item.
-
-    :param item_separator: text separator between each generated item. Can be either a
-                           string or a dictionary. If a string, use the same separator
-                           for all formats. If a dictionary, indicate a separator for
-                           each format.
     """
-    if isinstance(item_separator, str):
-        item_separator = defaultdict(lambda: item_separator)
 
-    def decorator(cls: Type[YamlTexModuleGenerator]):
-        class DecoratedClass(YamlTexModuleGenerator):
-            def __init__(self, *args, **kwargs):
-                self.wrapped_generator = cls(*args, **kwargs)
-                super().__init__(
-                    self.wrapped_generator.module_type,
-                    self.wrapped_generator.formatters,
-                    subdir="",  # single file for all items
-                )
-
-            def parse(self, data: Data) -> Data:
-                items = data[ITEMS_FIELD]
-                return {
-                    ITEMS_FIELD: [self.wrapped_generator.parse(item) for item in items]
+    class DecoratedClass(YamlTexModuleGenerator):
+        def __init__(self, *args, **kwargs):
+            self.wrapped_generator = cls(*args, **kwargs)
+            formatters = {
+                fmt: lambda data: {
+                    ITEMS_FIELD: [formatter(item) for item in data[ITEMS_FIELD]]
                 }
+                for fmt, formatter in self.wrapped_generator.formatters.items()
+            }
+            super().__init__(
+                self.wrapped_generator.module_type,
+                formatters,
+                subdir="",  # single file for all items
+            )
 
-            def generate(self, parsed_data: Data, fmt: str) -> str:
-                sep = item_separator[fmt]
-                items = parsed_data[ITEMS_FIELD]
-                return sep.join(
-                    self.wrapped_generator.generate(item, fmt) for item in items
-                )
+        def parse(self, data: Data) -> Data:
+            items = data[ITEMS_FIELD]
+            return {ITEMS_FIELD: [self.wrapped_generator.parse(item) for item in items]}
 
-            def generate_dir(self, source_dir: str, **kwargs) -> None:
-                raise TypeError(
-                    f"{cls.__name__} is a single-file-multiple-items generator"
-                )
+        def generate_dir(self, source_dir: str, **kwargs) -> None:
+            raise TypeError(f"{cls.__name__} is a single-file-multiple-items generator")
 
-        functools.update_wrapper(DecoratedClass, cls, updated=())
-        return DecoratedClass
-
-    return decorator
+    functools.update_wrapper(DecoratedClass, cls, updated=())
+    return DecoratedClass
 
 
 # ---------------- concrete subclasses -------------------
