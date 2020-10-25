@@ -165,6 +165,14 @@ class ContactInfoGenerator(YamlTexModuleGenerator):
         return parsed_data.copy()
 
 
+@single_file_multiple_items
+class SkillsGenerator(YamlTexModuleGenerator):
+    def __init__(self):
+        item_type = "skill"
+        formatters = {"cv": lambda x: x, "resume": lambda x: x}
+        super().__init__(item_type, formatters)
+
+
 class EducationItemGenerator(YamlTexModuleGenerator):
     def __init__(self):
         item_type = "education"

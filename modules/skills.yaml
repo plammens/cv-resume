@@ -1,0 +1,19 @@
+items:
+  - name: Python
+    level: Fluent
+    score: 4
+  - name: C++
+    level: Intermediate
+    score: 3
+  - name: Java
+    level: Intermediate
+    score: 3
+  - name: Git
+    level: Advanced
+    score: 3.5
+  - name: \texttt{pandas}
+    level: Advanced
+    score: 3.5
+  - name: \LaTeX
+    level: Lower intermediate
+    score: 2.5

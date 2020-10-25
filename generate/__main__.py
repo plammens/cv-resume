@@ -4,6 +4,7 @@ import logging
 from .generators import (
     ContactInfoGenerator,
     EducationItemGenerator,
+    SkillsGenerator,
     TexIdentityGenerator,
     WorkItemGenerator,
 )
@@ -36,8 +37,9 @@ def setup_logging(level):
 def main(**kwargs):
     setup_logging(kwargs.get("logging_level", logging.INFO))
 
-    TexIdentityGenerator("toplevel", subdir="").generate_dir("modules")
+    TexIdentityGenerator("toplevel", subdir="").generate_file("modules/aboutme.tex")
     ContactInfoGenerator().generate_file("modules/contact-info.yaml")
+    SkillsGenerator().generate_file("modules/skills.yaml")
     EducationItemGenerator().generate_dir("modules/education-items")
     WorkItemGenerator().generate_dir("modules/work-items")
 

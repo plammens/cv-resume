@@ -27,7 +27,7 @@ class MultiItemTemplate(Template):
 
     def fill(self, fields: FormattedFields) -> str:
         items_fmt = self.item_sep.join(
-            self.item_template.format(item) for item in fields[ITEMS_FIELD]
+            self.item_template.format(**item) for item in fields[ITEMS_FIELD]
         )
         return self.global_template.format(items=items_fmt)
 
