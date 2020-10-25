@@ -68,7 +68,7 @@ class FileToFileGenerator(AbstractTexModuleGenerator, metaclass=ABCMeta):
     def generate_file(self, path):
         """Generate single file"""
         name = os.path.basename(path).rsplit(".")[0]
-        logger.debug("Processing %s (%s)", name, path)
+        logger.debug("%s processing %s (%s)", self.__class__.__name__, name, path)
         with open(path) as f:
             data = self.parse(self.read(f))
         for fmt in self.formatters:
