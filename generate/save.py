@@ -9,6 +9,7 @@ logger = logging.getLogger(__name__)
 
 
 def ensure_output_dir(path=ROOT_OUTPUT_PATH):
+    path = os.path.normpath(path)  # avoid empty path at the end (foo/bar/)
     if not os.path.exists(path):
         ensure_output_dir(os.path.dirname(path))
         os.mkdir(path)
