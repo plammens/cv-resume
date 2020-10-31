@@ -7,7 +7,15 @@ comment:
   expected-end-date: 2023
   other:
 description: >
-  Entered at Level 2. Activities \& Societies: HackerOlympics 2019, Chapel Choir,
+  Entered at Level 2.
+  Highlighted modules:
+  Algorithmics I,
+  Data Fundamentals,
+  Systems Programming,
+  Professional Software Development,
+  Cybersecurity Fundamentals,
+  Discrete Mathematics.
+  Activities \& Societies: HackerOlympics 2019, Chapel Choir,
   Kelvin Ensemble (First Year Representative).
 grade:
   type: GPA
