@@ -52,7 +52,7 @@ r"""
 {{ \noindent {start-date} - \\ {end-date} \\({comment}) }}
 {{ {degree} {title} }}
 {{ {institution} }}
-{{ {description} \textit{{ GPA: 19 (out of 22) }} }}
+{{ {description} \textit{{ {grade[type]}: {grade[value]} }} }}
 """,
         )
     },
