@@ -118,6 +118,7 @@ r"""
             global_template="{items}",
             item_template=r"\item \textbf{{ {name} }} -- {level} -- "
                           r"{{ \small {short-description} }}",
+            max_items=4,
         )
     },
 }
