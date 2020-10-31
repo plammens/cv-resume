@@ -32,7 +32,7 @@ items:
     description: >
       Developed on a freelance basis a 100h+ data-centric Python project
       making heavy use of \texttt{pandas} and other numerical Python libraries.
-    short-description: Developed a freelance 100h+ project using pandas.
+    short-description: Developed a 100h+ freelance project making heavy use of pandas.
   - name: \LaTeX
     level: Lower intermediate
     score: 2.5
