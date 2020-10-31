@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from typing import Dict
+from typing import Dict, Optional
 
 from .config import ITEMS_FIELD
 from .utils import FormattedFields
@@ -20,14 +20,22 @@ class SimpleTemplate(Template):
 
 
 class MultiItemTemplate(Template):
-    def __init__(self, global_template: str, item_template: str, item_sep: str = "\n"):
+    def __init__(
+        self,
+        global_template: str,
+        item_template: str,
+        item_sep: str = "\n",
+        max_items: Optional[int] = None,
+    ):
         self.global_template = global_template
         self.item_template = item_template
         self.item_sep = item_sep
+        self.max_items = max_items
 
     def fill(self, fields: FormattedFields) -> str:
         items_fmt = self.item_sep.join(
-            self.item_template.format(**item) for item in fields[ITEMS_FIELD]
+            self.item_template.format(**item)
+            for item in fields[ITEMS_FIELD][: self.max_items]
         )
         return self.global_template.format(items=items_fmt)
 
