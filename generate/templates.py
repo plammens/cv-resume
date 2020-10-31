@@ -2,7 +2,7 @@ from abc import ABCMeta, abstractmethod
 from typing import Dict
 
 from .config import ITEMS_FIELD
-from .utils import Data, FormattedFields
+from .utils import FormattedFields
 
 
 class Template(metaclass=ABCMeta):
@@ -32,7 +32,7 @@ class MultiItemTemplate(Template):
         return self.global_template.format(items=items_fmt)
 
 
-# fmt:
+# fmt: off
 TEX_TEMPLATES: Dict[str, Dict[str, Template]] = {
     "education": {
         "cv": SimpleTemplate(
@@ -103,12 +103,13 @@ r"""
     "skill": {
         "cv": MultiItemTemplate(
             global_template="{items}",
-            item_template=r"\addcvsoftwareskill{{ {name} }}{{ {level} }}",
+            item_template=r"\item \textbf{{ {name} }} -- {level} -- "
+                          r"{{ \small {description} }}",
         ),
         "resume": MultiItemTemplate(
-            global_template=r"\skills{{{items}}}",
-            item_template=r"{{{name}/{score}}}",
-            item_sep=",",
+            global_template="{items}",
+            item_template=r"\item \textbf{{ {name} }} -- {level} -- "
+                          r"{{ \small {short-description} }}",
         )
     },
 }

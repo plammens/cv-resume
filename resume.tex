@@ -25,17 +25,24 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%Skill bar section, each skill must have a value between 0 an 6 (float)%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\input{generated/resume/skills.tex}
+\let\givenskill\relax
+\newcommand{\givenskill}{
+\vspace{-5mm}
+\begin{itemize}
+    \input{generated/resume/skills.tex}
+\end{itemize}
+\vspace{5mm}
+}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%Skill text section, each skill must have a value between 0 an 6%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \cvlanguages{
-    \normalsize
-    \begin{tabular}{p{2cm} L{4cm}}
-        English & \textcolor{lgray}{CEFR C1 (\textit{Cambridge Advanced English Certificate})} \\
-        Spanish & \textcolor{lgray}{Native} \\
-        Catalan & \textcolor{lgray}{Native} \\
+\normalsize
+\begin{tabular}{p{2cm} L{4cm}}
+    English & \textcolor{lgray}{CEFR C1 (\textit{Cambridge Advanced English Certificate})} \\
+    Spanish & \textcolor{lgray}{Native}                                                    \\
+    Catalan & \textcolor{lgray}{Native}                                                    \\
         Italian & \textcolor{lgray}{Maternal} \\
         French & \textcolor{lgray}{CEFR A2 (\textit{Diplôme d'Etudes en Langue Française})} \\
     \end{tabular}

@@ -106,11 +106,6 @@
     {\setstretch{0.9}\small #6 \par}%
 }
 
-\newcommand{\cvsoftwareskills}{}
-\newcommand{\addcvsoftwareskill}[2]{
-    \g@addto@macro\cvsoftwareskills{\\ #1 \noexpand& #2}
-}
-
 \newcommand{\cvlanguages}{}
 \newcommand{\addcvlanguage}[2]{
     \g@addto@macro\cvlanguages{\\ #1 \noexpand& #2}
@@ -131,8 +126,6 @@
 \input{generated/cv/contact-info.tex}
 
 \newcommand{\cvaboutme}{\input{generated/cv/aboutme.tex}}
-
-\input{generated/cv/skills.tex}
 
 \addcvlanguage{English}{CEFR C1 (\textit{Cambridge Advanced English certificate})}
 \addcvlanguage{Spanish}{Native}
@@ -175,33 +168,34 @@
 
 \begin{twocol}
     \cvsectiontitle{Work experience}
-    
-    \switchcolumn
-    
-    \cvsectionrule
-    \input{generated/cv/work/tutor.tex}
-\end{twocol}
-     
-\begin{twocol}
-     \cvsectiontitle{Software\\skills}
-     
-     \switchcolumn
-     
-     \cvsectionrule\newline
-     \begin{tabular}{p{3cm}|p{6cm}}
-          \large \textbf{Technology} & \large \textbf{Skill level}
-          \cvsoftwareskills
-     \end{tabular}
+
+\switchcolumn
+
+\cvsectionrule
+\input{generated/cv/work/tutor.tex}
 \end{twocol}
 
 \begin{twocol}
-    \cvsectiontitle{Courses}
-    
-    \switchcolumn
-    
-    \cvsectionrule
-    \cvchronoitem{MESIO Summer School 2019}
-                 {Univ. Politèc. de Catalunya - Univ. de Barcelona}
+\cvsectiontitle{Software\\skills}
+
+\switchcolumn
+
+\cvsectionrule\newline
+\vspace{-5mm}
+\begin{itemize}
+\input{generated/cv/skills.tex}
+\end{itemize}
+\vspace{-5mm}
+\end{twocol}
+
+\begin{twocol}
+\cvsectiontitle{Courses}
+
+\switchcolumn
+
+\cvsectionrule
+\cvchronoitem{MESIO Summer School 2019}
+{Univ. Politèc. de Catalunya - Univ. de Barcelona}
                  {June}{July 2019}
                  {}
                  {The MESIO (Master in Statistics and Operations Research) UPC-UB Summer School is a specialized training program that offers several 15-hour courses in the span of four weeks, with topics ranging from statistics to deep learning. I attended the following courses:

@@ -3,14 +3,13 @@ import functools
 import logging
 import os
 from abc import ABCMeta, abstractmethod
-from collections import defaultdict
-from typing import Dict, IO, Optional, Sequence, Type, Union
+from typing import Dict, IO, Optional, Type
 
 import yaml
 
 from .config import DATE_FIELDS, FORMATS, ITEMS_FIELD, ROOT_OUTPUT_PATH, TEXT_FIELDS
-from .templates import TEX_TEMPLATES
 from .save import save_tex
+from .templates import TEX_TEMPLATES
 from .tokenize import tokenize
 from .utils import (
     Data,
@@ -171,6 +170,13 @@ class SkillsGenerator(YamlTexModuleGenerator):
         item_type = "skill"
         formatters = {"cv": lambda x: x, "resume": lambda x: x}
         super().__init__(item_type, formatters)
+
+    def parse(self, data: Data) -> Data:
+        data = data.copy()
+        data["short-description"] = (
+            data.get("short-description", None) or data["description"]
+        )
+        return super().parse(data)
 
 
 class EducationItemGenerator(YamlTexModuleGenerator):

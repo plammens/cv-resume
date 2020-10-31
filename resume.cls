@@ -220,12 +220,6 @@
 
 \profilesection{Skills}{4.65cm}
 \givenskill
-\giventextskill
-\noindent
-\noindent
-\scriptsize
-(*)[The skill scale is from 0 (Fundamental Awareness) to 5 (Expert).]
-
 
 \profilesection{Languages}{2.8cm}
 \givenlanguages
