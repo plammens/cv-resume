@@ -50,14 +50,14 @@ r"""
 {{ {institution} }}
 {{ {start-date} }}
 {{ {end-date} }}
-{{ {comment} }}
+{{{comment}}}
 {{ {description} \textit{{ {grade[type]}: {grade[value]} }} }}
 """
         ),
         "resume": SimpleTemplate(
 r"""
 \twentyitem
-{{ \noindent {start-date} - \\ {end-date} \\({comment}) }}
+{{ \noindent {start-date} - \\ {end-date} \\{comment} }}
 {{ {degree} {title} }}
 {{ {institution} }}
 {{ {description} \textit{{ {grade[type]}: {grade[value]} }} }}

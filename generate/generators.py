@@ -226,7 +226,7 @@ class EducationItemGenerator(YamlTexModuleGenerator):
         formatted["comment"] = (
             f"Expected graduation: {comment['expected-end-date']}"
             if comment["expected-end-date"]
-            else f"{comment['other']}"
+            else comment["other"] or ""
         )
 
         return formatted
@@ -238,15 +238,19 @@ class EducationItemGenerator(YamlTexModuleGenerator):
 
         comment = data["comment"]
         formatted["comment"] = (
-            f"exp. {comment['expected-end-date']}"
+            f"(exp. {comment['expected-end-date']})"
             if comment["expected-end-date"]
-            else f"{comment['other']}"
+            else f"({comment['other']})"
+            if comment["other"]
+            else
+            ""
         )
 
         institution = data["institution"]
         formatted["institution"] = (
             rf" \newline {institution}"
-            if len(data["degree"]) + len(data["title"]) + len(institution) > 55
+            if len(formatted["degree"]) + len(formatted["title"]) + len(institution)
+            > 55
             and len(institution) < 30
             else institution
         )
