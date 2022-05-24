@@ -202,17 +202,6 @@ class ContactInfoGenerator(YamlTexModuleGenerator):
 class SkillsGenerator(YamlTexModuleGenerator):
     item_type = "skill"
 
-    def __init__(self):
-        formatters = {"cv": lambda x: x, "resume": lambda x: x}
-        super().__init__(formatters=formatters)
-
-    def parse(self, data: Data) -> Data:
-        data = data.copy()
-        data["short-description"] = (
-            data.get("short-description", None) or data["description"]
-        )
-        return super().parse(data)
-
 
 class EducationItemGenerator(YamlTexModuleGenerator):
     item_type = "education"
