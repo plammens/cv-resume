@@ -49,6 +49,27 @@ class AbstractTexModuleGenerator(metaclass=ABCMeta):
     def save(self, generated_tex: str, *, name: str, fmt: str):
         pass
 
+    def format_base(self, parsed_data: Data) -> FormattedFields:
+        return parsed_data.copy()
+
+    def format_fields_cv(self, data: Data) -> FormattedFields:
+        formatted = self.format_base(data)
+
+        for date_field in DATE_FIELDS:
+            if date_field in data:
+                formatted[date_field] = format_date_long(data[date_field])
+
+        return formatted
+
+    def format_fields_resume(self, data: Data) -> FormattedFields:
+        formatted = self.format_base(data)
+
+        for date_field in DATE_FIELDS:
+            if date_field in data:
+                formatted[date_field] = format_date_short(data[date_field])
+
+        return formatted
+
 
 class FileToFileGenerator(AbstractTexModuleGenerator, metaclass=ABCMeta):
     def __init__(
@@ -99,7 +120,7 @@ class YamlTexModuleGenerator(FileToFileGenerator, metaclass=ABCMeta):
     def generate(self, parsed_data: Data, fmt: str) -> str:
         formatter = self.formatters[fmt]
         template = TEX_TEMPLATES[self.module_type][fmt]
-        tex = template.fill(formatter(self.format_base(parsed_data)))
+        tex = template.fill(formatter(parsed_data))
         return tex
 
     def parse(self, data: Data) -> Data:
@@ -111,9 +132,8 @@ class YamlTexModuleGenerator(FileToFileGenerator, metaclass=ABCMeta):
             parsed[text_field] = tokenize(data[text_field])
         return parsed
 
-    @staticmethod
-    def format_base(parsed_data: Data) -> FormattedFields:
-        formatted = parsed_data.copy()
+    def format_base(self, parsed_data: Data) -> FormattedFields:
+        formatted = super().format_base(parsed_data)
         # replace None with empty string:
         for key, value in parsed_data.items():
             if value is None:
@@ -163,15 +183,10 @@ class ContactInfoGenerator(YamlTexModuleGenerator):
     item_type = "contact-info"
 
     def __init__(self):
-        formatters = {"cv": self.format_generic, "resume": self.format_generic}
-        super().__init__(formatters=formatters, subdir="")
+        super().__init__(subdir="")
 
     def parse(self, data: Data) -> Data:
         return data
-
-    @staticmethod
-    def format_generic(parsed_data: Data) -> FormattedFields:
-        return parsed_data.copy()
 
 
 @single_file_multiple_items
@@ -193,9 +208,8 @@ class SkillsGenerator(YamlTexModuleGenerator):
 class EducationItemGenerator(YamlTexModuleGenerator):
     item_type = "education"
 
-    @staticmethod
-    def format_fields_cv(data: Data) -> FormattedFields:
-        formatted = data.copy()
+    def format_fields_cv(self, data: Data) -> FormattedFields:
+        formatted = super().format_fields_cv(data)
 
         formatted["degree"] = format_optional(data["degree"])
 
@@ -206,14 +220,10 @@ class EducationItemGenerator(YamlTexModuleGenerator):
             else f"{comment['other']}"
         )
 
-        for date_field in DATE_FIELDS:
-            formatted[date_field] = format_date_long(data[date_field])
-
         return formatted
 
-    @staticmethod
-    def format_fields_resume(data: Data) -> FormattedFields:
-        formatted = data.copy()
+    def format_fields_resume(self, data: Data) -> FormattedFields:
+        formatted = super().format_fields_resume(data)
 
         formatted["degree"] = format_optional(data["degree"])
 
@@ -232,34 +242,23 @@ class EducationItemGenerator(YamlTexModuleGenerator):
             else institution
         )
 
-        for date_field in DATE_FIELDS:
-            formatted[date_field] = format_date_short(data[date_field])
-
         return formatted
 
 
 class WorkItemGenerator(YamlTexModuleGenerator):
     item_type = "work"
 
-    @staticmethod
-    def format_fields_cv(data: Data) -> FormattedFields:
-        formatted = data.copy()
+    def format_fields_cv(self, data: Data) -> FormattedFields:
+        formatted = super().format_fields_cv(data)
 
         formatted["comment"] = format_optional(data["comment"])
 
-        for date_field in DATE_FIELDS:
-            formatted[date_field] = format_date_long(data[date_field])
-
         return formatted
 
-    @staticmethod
-    def format_fields_resume(data: Data) -> FormattedFields:
-        formatted = data.copy()
+    def format_fields_resume(self, data: Data) -> FormattedFields:
+        formatted = super().format_fields_resume(data)
 
         formatted["optional"] = format_optional(data["comment"])
-
-        for date_field in DATE_FIELDS:
-            formatted[date_field] = format_date_short(data[date_field])
 
         return formatted
 
