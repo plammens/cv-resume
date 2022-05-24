@@ -5,7 +5,7 @@ from .generators import (
     ContactInfoGenerator,
     CourseItemGenerator,
     EducationItemGenerator,
-    SkillsGenerator,
+    ProjectItemGenerator, SkillsGenerator,
     TexIdentityGenerator,
     WorkItemGenerator,
 )
@@ -45,6 +45,7 @@ def main(**kwargs):
     EducationItemGenerator().generate_dir("modules/education-items")
     WorkItemGenerator().generate_dir("modules/work-items")
     CourseItemGenerator().generate_dir("modules/courses-items")
+    ProjectItemGenerator().generate_dir("modules/projects-items")
 
 
 def define_cli():

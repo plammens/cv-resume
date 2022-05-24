@@ -108,6 +108,28 @@ r"""
 """
         ),
     },
+    "project": {
+        "cv": SimpleTemplate(
+r"""
+\cvchronoitem
+{{ {title} }}
+{{}}
+{{ {start-date} }}
+{{ {end-date} }}
+{{{comment}}}
+{{ {description} {link} }}
+"""
+        ),
+        "resume": SimpleTemplate(
+r"""
+\twentyitem
+{{\noindent {start-date} - \\ {end-date} }}
+{{ {title} }}
+{{{link}}}
+{{ {short-description} }}
+"""
+        ),
+    },
     "contact-info": {
         "cv": SimpleTemplate(
 r"""

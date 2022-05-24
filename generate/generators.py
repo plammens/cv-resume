@@ -276,6 +276,26 @@ class CourseItemGenerator(YamlTexModuleGenerator):
     item_type = "course"
 
 
+class ProjectItemGenerator(YamlTexModuleGenerator):
+    item_type = "project"
+
+    def format_fields_cv(self, data: Data) -> FormattedFields:
+        formatted = super().format_fields_cv(data)
+
+        link = data["link"]
+        formatted["link"] = rf"Link: \showlink{{{link}}}" if link else ""
+
+        return formatted
+
+    def format_fields_resume(self, data: Data) -> FormattedFields:
+        formatted = super().format_fields_resume(data)
+
+        link = data["link"]
+        formatted["link"] = rf"\href{{{link}}}{{{link}}}" if link else ""
+
+        return formatted
+
+
 class TexIdentityGenerator(FileToFileGenerator):
     def __init__(
         self,
