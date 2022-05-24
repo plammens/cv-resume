@@ -89,7 +89,6 @@
 \newcommand{\rendercvphone}{\textcolor{myorange}{\cvphone}}
 \newcommand{\rendercvlinkedin}{\showlink{linkedin.com/in/\cvlinkedin/}}
 \newcommand{\rendercvgithub}{\showlink{github.com/\cvgithub}}
-\newcommand{\rendercvstackoverflow}{\showlink{stackoverflow.com/story/\cvstackoverflow}}
 
 % --- SECTIONS ---
 \newcommand{\cvsectiontitle}[1]{
@@ -145,9 +144,8 @@
     
     {\setlength{\tabcolsep}{0pt}
     \begin{tabular}{p{8mm}p{6cm}p{8mm}p{4cm}}%
-        \icon{@} & \rendercvemail & \icon{\faGithub} & \rendercvgithub \\
-        \Large\icon{\Telefon} & \rendercvphone & \icon{\faStackOverflow} & \rendercvstackoverflow \\
-        \icon{\faLinkedin} & \rendercvlinkedin & &
+        \icon{@}              & \rendercvemail & \icon{\faGithub}   & \rendercvgithub   \\
+        \Large\icon{\Telefon} & \rendercvphone & \icon{\faLinkedin} & \rendercvlinkedin
     \end{tabular}}
     \vspace*{10pt}\newline
     \subsection*{About me}

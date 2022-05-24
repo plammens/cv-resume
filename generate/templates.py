@@ -93,7 +93,6 @@ r"""
 \newcommand{{\cvphone}}{{{phone}}}
 \newcommand{{\cvlinkedin}}{{{linkedin}}}
 \newcommand{{\cvgithub}}{{{github}}}
-\newcommand{{\cvstackoverflow}}{{{stack-overflow}}}
 """
         ),
         "resume": SimpleTemplate(
@@ -104,7 +103,6 @@ r"""
 \cvmail{{{email}}}
 \cvgithub{{github.com/{github}}}
 \cvlinkedin{{linkedin.com/in/{linkedin}}}
-\cvstackoverflow{{stackoverflow.com/story/{stack-overflow}}}
 """
         ),
     },
