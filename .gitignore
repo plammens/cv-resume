@@ -244,3 +244,5 @@ TSWLatexianTemp*
 
 ### CUSTOM
 generated/
+/out/
+__pycache__
