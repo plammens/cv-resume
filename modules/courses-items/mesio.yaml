@@ -1,0 +1,18 @@
+title: MESIO Summer School 2019
+institution: Univ. Politèc. de Catalunya - Univ. de Barcelona
+start-date: June 2019
+end-date: July 2019
+description: >
+  The MESIO (Master in Statistics and Operations Research) UPC-UB Summer School is a specialized training program that offers several 15-hour courses in the span of four weeks, with topics ranging from statistics to deep learning. I attended the following courses:
+  \begin{itemize}
+     \item \textbf{Statistical and Machine Learning Methods for Classification Using R} -- this course presented a range of statistical methods and models for classification, with their implementation in R. \textit{Grade: 9.8/10}
+     \item \textbf{``Curso Práctico de Deep Learning''} -- an overview of deep learning models, and their implementation with Keras in R or Python. \textit{Grade: 9.5/10}
+     \item \textbf{``Deep Learning with PyTorch''} -- introduction to deep learning using the PyTorch library. \textit{Grade: 9/10}
+  \end{itemize}
+short-description: >
+  Attended the following courses:
+  \begin{itemize}
+     \item \textbf{Statistical and Machine Learning Methods for Classification Using R} -- \textit{Grade: 9.8/10}
+     \item \textbf{''Curso Práctico de Deep Learning''} --  \textit{Grade: 9.5/10}
+     \item \textbf{Deep Learning with PyTorch} --  \textit{Grade: 9/10}
+  \end{itemize}
