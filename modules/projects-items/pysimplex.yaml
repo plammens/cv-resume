@@ -1,0 +1,8 @@
+title: PySimplex
+start-date: November 2018
+end-date: November 2018
+comment: archived
+link: https://github.com/plammens/PySimplex
+description: >
+  Simple Python implementation of the primal simplex algorithm in linear optimization.
+  Based on university coursework from the Mathematical Programming course.
