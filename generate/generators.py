@@ -68,6 +68,9 @@ class AbstractTexModuleGenerator(metaclass=ABCMeta):
             if date_field in data:
                 formatted[date_field] = format_date_short(data[date_field])
 
+        if "description" in formatted:
+            formatted.setdefault("short-description", formatted["description"])
+
         return formatted
 
 
@@ -111,8 +114,12 @@ class FileToFileGenerator(AbstractTexModuleGenerator, metaclass=ABCMeta):
 class YamlTexModuleGenerator(FileToFileGenerator, metaclass=ABCMeta):
     item_type: ClassVar[str]
 
-    def __init__(self, *, formatters: Dict[str, Formatter] = None, subdir: Optional[str] = None):
-        super().__init__(module_type=self.item_type, formatters=formatters, subdir=subdir)
+    def __init__(
+        self, *, formatters: Dict[str, Formatter] = None, subdir: Optional[str] = None
+    ):
+        super().__init__(
+            module_type=self.item_type, formatters=formatters, subdir=subdir
+        )
 
     def read(self, source):
         return yaml.full_load(source)
@@ -133,6 +140,8 @@ class YamlTexModuleGenerator(FileToFileGenerator, metaclass=ABCMeta):
         return parsed
 
     def format_base(self, parsed_data: Data) -> FormattedFields:
+        parsed_data = parsed_data.copy()
+        parsed_data.setdefault("comment", None)
         formatted = super().format_base(parsed_data)
         # replace None with empty string:
         for key, value in parsed_data.items():
@@ -238,7 +247,7 @@ class EducationItemGenerator(YamlTexModuleGenerator):
         formatted["institution"] = (
             rf" \newline {institution}"
             if len(data["degree"]) + len(data["title"]) + len(institution) > 55
-               and len(institution) < 30
+            and len(institution) < 30
             else institution
         )
 
@@ -266,22 +275,12 @@ class WorkItemGenerator(YamlTexModuleGenerator):
 class CourseItemGenerator(YamlTexModuleGenerator):
     item_type = "course"
 
-    def format_base(self, parsed_data: Data) -> FormattedFields:
-        parsed_data = parsed_data.copy()
-        parsed_data.setdefault("comment", None)
-        return super().format_base(parsed_data)
-
-    def format_fields_resume(self, data: Data) -> FormattedFields:
-        formatted = super().format_fields_resume(data)
-
-        formatted.setdefault("short-description", formatted["description"])
-
-        return formatted
-
 
 class TexIdentityGenerator(FileToFileGenerator):
     def __init__(
-        self, module_type: str, subdir: Optional[str] = None,
+        self,
+        module_type: str,
+        subdir: Optional[str] = None,
     ):
         formatters = {key: lambda x: x for key in FORMATS}
         super().__init__(module_type, formatters, subdir)
