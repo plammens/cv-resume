@@ -3,6 +3,7 @@ import logging
 
 from .generators import (
     ContactInfoGenerator,
+    CourseItemGenerator,
     EducationItemGenerator,
     SkillsGenerator,
     TexIdentityGenerator,
@@ -25,7 +26,8 @@ def setup_logging(level):
     root.setLevel(level)
     # noinspection PyArgumentList
     formatter = logging.Formatter(
-        fmt="{asctime} - {levelname:8} - {origin:20} - {message}", style="{",
+        fmt="{asctime} - {levelname:8} - {origin:20} - {message}",
+        style="{",
     )
     handler = logging.StreamHandler()
     handler.setFormatter(formatter)
@@ -42,6 +44,7 @@ def main(**kwargs):
     SkillsGenerator().generate_file("modules/skills.yaml")
     EducationItemGenerator().generate_dir("modules/education-items")
     WorkItemGenerator().generate_dir("modules/work-items")
+    CourseItemGenerator().generate_dir("modules/courses-items")
 
 
 def define_cli():

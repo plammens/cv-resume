@@ -86,6 +86,28 @@ r"""
 """
         ),
     },
+    "course": {
+        "cv": SimpleTemplate(
+r"""
+\cvchronoitem
+{{ {title} }}
+{{ {institution} }}
+{{ {start-date} }}
+{{ {end-date} }}
+{{{comment}}}
+{{ {description} }}
+"""
+        ),
+        "resume": SimpleTemplate(
+r"""
+\twentyitem
+{{\noindent {start-date} - \\ {end-date} }}
+{{ {title} }}
+{{ {institution} }}
+{{ {short-description} }}
+"""
+        ),
+    },
     "contact-info": {
         "cv": SimpleTemplate(
 r"""

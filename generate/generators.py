@@ -263,6 +263,22 @@ class WorkItemGenerator(YamlTexModuleGenerator):
         return formatted
 
 
+class CourseItemGenerator(YamlTexModuleGenerator):
+    item_type = "course"
+
+    def format_base(self, parsed_data: Data) -> FormattedFields:
+        parsed_data = parsed_data.copy()
+        parsed_data.setdefault("comment", None)
+        return super().format_base(parsed_data)
+
+    def format_fields_resume(self, data: Data) -> FormattedFields:
+        formatted = super().format_fields_resume(data)
+
+        formatted.setdefault("short-description", formatted["description"])
+
+        return formatted
+
+
 class TexIdentityGenerator(FileToFileGenerator):
     def __init__(
         self, module_type: str, subdir: Optional[str] = None,
