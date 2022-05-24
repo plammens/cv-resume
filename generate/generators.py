@@ -3,7 +3,7 @@ import functools
 import logging
 import os
 from abc import ABCMeta, abstractmethod
-from typing import Dict, IO, Optional, Type
+from typing import ClassVar, Dict, IO, Optional, Type
 
 import yaml
 
@@ -26,7 +26,10 @@ logger = logging.getLogger(__name__)
 
 
 class AbstractTexModuleGenerator(metaclass=ABCMeta):
-    def __init__(self, module_type: str, formatters: Dict[str, Formatter]):
+    def __init__(self, module_type: str, formatters: Dict[str, Formatter] = None):
+        if formatters is None:
+            formatters = {fmt: getattr(self, f"format_fields_{fmt}") for fmt in FORMATS}
+
         self.module_type = module_type
         self.formatters = formatters
 
@@ -51,7 +54,7 @@ class FileToFileGenerator(AbstractTexModuleGenerator, metaclass=ABCMeta):
     def __init__(
         self,
         module_type: str,
-        formatters: Dict[str, Formatter],
+        formatters: Dict[str, Formatter] = None,
         subdir: Optional[str] = None,
     ):
         super().__init__(module_type, formatters)
@@ -85,6 +88,11 @@ class FileToFileGenerator(AbstractTexModuleGenerator, metaclass=ABCMeta):
 
 
 class YamlTexModuleGenerator(FileToFileGenerator, metaclass=ABCMeta):
+    item_type: ClassVar[str]
+
+    def __init__(self, *, formatters: Dict[str, Formatter] = None, subdir: Optional[str] = None):
+        super().__init__(module_type=self.item_type, formatters=formatters, subdir=subdir)
+
     def read(self, source):
         return yaml.full_load(source)
 
@@ -122,6 +130,8 @@ def single_file_multiple_items(cls: Type[YamlTexModuleGenerator]):
     """
 
     class DecoratedClass(YamlTexModuleGenerator):
+        item_type = cls.item_type
+
         def __init__(self, *args, **kwargs):
             self.wrapped_generator = cls(*args, **kwargs)
             formatters = {
@@ -131,8 +141,7 @@ def single_file_multiple_items(cls: Type[YamlTexModuleGenerator]):
                 for fmt, formatter in self.wrapped_generator.formatters.items()
             }
             super().__init__(
-                self.wrapped_generator.module_type,
-                formatters,
+                formatters=formatters,
                 subdir="",  # single file for all items
             )
 
@@ -151,10 +160,11 @@ def single_file_multiple_items(cls: Type[YamlTexModuleGenerator]):
 
 
 class ContactInfoGenerator(YamlTexModuleGenerator):
+    item_type = "contact-info"
+
     def __init__(self):
-        item_type = "contact-info"
         formatters = {"cv": self.format_generic, "resume": self.format_generic}
-        super().__init__(item_type, formatters, subdir="")
+        super().__init__(formatters=formatters, subdir="")
 
     def parse(self, data: Data) -> Data:
         return data
@@ -166,10 +176,11 @@ class ContactInfoGenerator(YamlTexModuleGenerator):
 
 @single_file_multiple_items
 class SkillsGenerator(YamlTexModuleGenerator):
+    item_type = "skill"
+
     def __init__(self):
-        item_type = "skill"
         formatters = {"cv": lambda x: x, "resume": lambda x: x}
-        super().__init__(item_type, formatters)
+        super().__init__(formatters=formatters)
 
     def parse(self, data: Data) -> Data:
         data = data.copy()
@@ -180,10 +191,7 @@ class SkillsGenerator(YamlTexModuleGenerator):
 
 
 class EducationItemGenerator(YamlTexModuleGenerator):
-    def __init__(self):
-        item_type = "education"
-        formatters = {"cv": self.format_fields_cv, "resume": self.format_fields_resume}
-        super().__init__(item_type, formatters)
+    item_type = "education"
 
     @staticmethod
     def format_fields_cv(data: Data) -> FormattedFields:
@@ -220,7 +228,7 @@ class EducationItemGenerator(YamlTexModuleGenerator):
         formatted["institution"] = (
             rf" \newline {institution}"
             if len(data["degree"]) + len(data["title"]) + len(institution) > 55
-            and len(institution) < 30
+               and len(institution) < 30
             else institution
         )
 
@@ -231,10 +239,7 @@ class EducationItemGenerator(YamlTexModuleGenerator):
 
 
 class WorkItemGenerator(YamlTexModuleGenerator):
-    def __init__(self):
-        item_type = "work"
-        formatters = {"cv": self.format_fields_cv, "resume": self.format_fields_resume}
-        super().__init__(item_type, formatters)
+    item_type = "work"
 
     @staticmethod
     def format_fields_cv(data: Data) -> FormattedFields:
