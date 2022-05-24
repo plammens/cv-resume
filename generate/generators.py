@@ -203,6 +203,33 @@ class SkillsGenerator(YamlTexModuleGenerator):
     item_type = "skill"
 
 
+@single_file_multiple_items
+class LanguagesGenerator(YamlTexModuleGenerator):
+    item_type = "language"
+
+    FRAMEWORK_LINKS = {
+        "CEFR": "https://www.coe.int/en/web/common-european-framework-reference-languages/level-descriptions"
+    }
+
+    def format_base(self, parsed_data: Data) -> FormattedFields:
+        formatted = super().format_base(parsed_data)
+
+        level = parsed_data["level"]
+
+        name = (
+            rf"\href{{{link}}}{{ {framework} {level['name']} }}"
+            if (link := self.FRAMEWORK_LINKS.get(framework := level.get("framework")))
+            else f"{level['name']}"
+        )
+        level_fmt = name
+        if level.get("certificate"):
+            level_fmt += rf" (\textit{{{level['certificate']}}})"
+
+        formatted["level"] = level_fmt
+
+        return formatted
+
+
 class EducationItemGenerator(YamlTexModuleGenerator):
     item_type = "education"
 
@@ -231,8 +258,7 @@ class EducationItemGenerator(YamlTexModuleGenerator):
             if comment["expected-end-date"]
             else f"({comment['other']})"
             if comment["other"]
-            else
-            ""
+            else ""
         )
 
         institution = data["institution"]

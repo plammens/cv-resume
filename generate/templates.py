@@ -163,5 +163,15 @@ r"""
             max_items=4,
         )
     },
+    "language": {
+        "cv": MultiItemTemplate(
+            global_template="{items}",
+            item_template=r"\addcvlanguage{{{language}}}{{{level}}}"
+        ),
+        "resume": MultiItemTemplate(
+            global_template="{items}",
+            item_template=r"{language} & \textcolor{{lgray}}{{ {level} }} \\"
+        ),
+    }
 }
 # fmt: on
