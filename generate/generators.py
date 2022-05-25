@@ -283,22 +283,19 @@ class EducationItemGenerator(YamlTexModuleGenerator):
         return formatted
 
 
-class WorkItemGenerator(YamlTexModuleGenerator):
-    item_type = "work"
+class ExperienceItemGenerator(YamlTexModuleGenerator):
+    item_type = "experience"
 
-    def format_fields_cv(self, data: Data) -> FormattedFields:
-        formatted = super().format_fields_cv(data)
+    def format_base(self, data: Data) -> FormattedFields:
+        formatted = super().format_base(data)
 
         formatted["comment"] = format_optional(data["comment"])
 
         return formatted
 
-    def format_fields_resume(self, data: Data) -> FormattedFields:
-        formatted = super().format_fields_resume(data)
 
-        formatted["optional"] = format_optional(data["comment"])
-
-        return formatted
+class WorkItemGenerator(ExperienceItemGenerator):
+    item_type = "work"
 
 
 class CourseItemGenerator(YamlTexModuleGenerator):

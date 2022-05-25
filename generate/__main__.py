@@ -5,7 +5,7 @@ from .generators import (
     ContactInfoGenerator,
     CourseItemGenerator,
     EducationItemGenerator,
-    LanguagesGenerator, ProjectItemGenerator, SkillsGenerator,
+    ExperienceItemGenerator, LanguagesGenerator, ProjectItemGenerator, SkillsGenerator,
     TexIdentityGenerator,
     WorkItemGenerator,
 )
@@ -45,6 +45,7 @@ def main(**kwargs):
     LanguagesGenerator().generate_file("modules/languages.yaml")
     EducationItemGenerator().generate_dir("modules/education-items")
     WorkItemGenerator().generate_dir("modules/work-items")
+    ExperienceItemGenerator().generate_dir("modules/experience-items")
     CourseItemGenerator().generate_dir("modules/courses-items")
     ProjectItemGenerator().generate_dir("modules/projects-items")
 
