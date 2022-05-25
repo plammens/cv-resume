@@ -233,6 +233,16 @@ class LanguagesGenerator(YamlTexModuleGenerator):
 class EducationItemGenerator(YamlTexModuleGenerator):
     item_type = "education"
 
+    def format_base(self, parsed_data: Data) -> FormattedFields:
+        formatted = super().format_base(parsed_data)
+
+        grade = parsed_data.get("grade")
+        formatted["grade"] = (
+            rf"\textit{{ {grade['type']}: {grade['value']} }}" if grade else ""
+        )
+
+        return formatted
+
     def format_fields_cv(self, data: Data) -> FormattedFields:
         formatted = super().format_fields_cv(data)
 

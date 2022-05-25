@@ -51,7 +51,7 @@ r"""
 {{ {start-date} }}
 {{ {end-date} }}
 {{{comment}}}
-{{ {description} \textit{{ {grade[type]}: {grade[value]} }} }}
+{{ {description} {grade} }}
 """
         ),
         "resume": SimpleTemplate(
@@ -60,7 +60,7 @@ r"""
 {{ \noindent {start-date} - \\ {end-date} \\{comment} }}
 {{ {degree} {title} }}
 {{ {institution} }}
-{{ {description} \textit{{ {grade[type]}: {grade[value]} }} }}
+{{ {description} {grade} }}
 """,
         )
     },
