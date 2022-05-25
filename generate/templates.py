@@ -46,7 +46,7 @@ TEX_TEMPLATES: Dict[str, Dict[str, Template]] = {
         "cv": SimpleTemplate(
 r"""
 \cvchronoitem
-{{ {degree} {title} }}
+{{\textsc{{{degree}}} {title} }}
 {{ {institution} }}
 {{ {start-date} }}
 {{ {end-date} }}
