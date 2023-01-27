@@ -152,6 +152,28 @@ r"""
 """
         ),
     },
+    "award": {
+        "cv": SimpleTemplate(
+r"""
+\cvchronoitem
+{{ {title} }}
+{{ {awarded-by} }}
+{{ {date} }}
+{{}}
+{{}}
+{{ {description} }}
+"""
+        ),
+        "resume": SimpleTemplate(
+r"""
+\twentyitem
+{{\noindent {date} }}
+{{ {title} }}
+{{}}
+{{ {short-description} }}
+"""
+        ),
+    },
     "contact-info": {
         "cv": SimpleTemplate(
 r"""

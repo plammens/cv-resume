@@ -2,10 +2,14 @@ import argparse
 import logging
 
 from .generators import (
+    AwardItemGenerator,
     ContactInfoGenerator,
     CourseItemGenerator,
     EducationItemGenerator,
-    ExperienceItemGenerator, LanguagesGenerator, ProjectItemGenerator, SkillsGenerator,
+    ExperienceItemGenerator,
+    LanguagesGenerator,
+    ProjectItemGenerator,
+    SkillsGenerator,
     TexIdentityGenerator,
     WorkItemGenerator,
 )
@@ -48,6 +52,7 @@ def main(**kwargs):
     ExperienceItemGenerator().generate_dir("modules/experience-items")
     CourseItemGenerator().generate_dir("modules/courses-items")
     ProjectItemGenerator().generate_dir("modules/projects-items")
+    AwardItemGenerator().generate_dir("modules/awards-items")
 
 
 def define_cli():

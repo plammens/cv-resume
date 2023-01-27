@@ -136,7 +136,8 @@ class YamlTexModuleGenerator(FileToFileGenerator, metaclass=ABCMeta):
         for date_field in DATE_FIELDS & fields:
             parsed[date_field] = parse_date(data[date_field])
         for text_field in TEXT_FIELDS & fields:
-            parsed[text_field] = tokenize(data[text_field])
+            text = data[text_field]
+            parsed[text_field] = tokenize(text) if text else None
         return parsed
 
     def format_base(self, parsed_data: Data) -> FormattedFields:
@@ -320,6 +321,10 @@ class ProjectItemGenerator(YamlTexModuleGenerator):
         formatted["link"] = rf"\href{{{link}}}{{{link}}}" if link else ""
 
         return formatted
+
+
+class AwardItemGenerator(YamlTexModuleGenerator):
+    item_type = "award"
 
 
 class TexIdentityGenerator(FileToFileGenerator):
