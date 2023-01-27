@@ -196,7 +196,14 @@ r"""
     },
     "skill": {
         "cv": MultiItemTemplate(
-            global_template="{items}",
+            global_template=
+r"""
+\vspace{{-5mm}}
+\begin{{itemize}}
+{items}
+\end{{itemize}}
+\vspace{{-5mm}}
+""",
             item_template=r"\item \textbf{{ {name} }} -- {level} -- "
                           r"{{ \small {description} }}",
         ),
