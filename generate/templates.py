@@ -214,6 +214,19 @@ r"""
             max_items=4,
         )
     },
+    "skill-compact": {
+        "cv": MultiItemTemplate(
+            global_template="{items}",
+            item_template=r"\textbf{{ {name} }} ({level})",
+            item_sep=", "
+        ),
+        "resume": MultiItemTemplate(
+            global_template="{items}",
+            item_template=r"\item \textbf{{ {name} }} -- {level} -- "
+                          r"{{ \small {short-description} }}",
+            max_items=4,
+        )
+    },
     "language": {
         "cv": MultiItemTemplate(
             global_template="{items}",
@@ -223,6 +236,6 @@ r"""
             global_template="{items}",
             item_template=r"{language} & \textcolor{{lgray}}{{ {level} }} \\"
         ),
-    }
+    },
 }
 # fmt: on

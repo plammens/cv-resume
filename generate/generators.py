@@ -204,6 +204,13 @@ class SkillsGenerator(YamlTexModuleGenerator):
     item_type = "skill"
 
 
+class CompactSkillsGenerator(SkillsGenerator):
+    item_type = "skill-compact"
+
+    def save(self, generated_tex: str, *, name: str, fmt: str):
+        super().save(generated_tex, name=f"{name}-compact", fmt=fmt)
+
+
 @single_file_multiple_items
 class LanguagesGenerator(YamlTexModuleGenerator):
     item_type = "language"
