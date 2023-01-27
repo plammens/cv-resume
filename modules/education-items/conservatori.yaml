@@ -1,13 +1,15 @@
-degree:
-title: "``Grau Professional de Música``"
+degree: "``Grau Professional de Música''"
+title: Cello
 institution: Conservatori de Sant Cugat
-start-date: October 2010
+start-date: September 2011
 end-date: June 2018
 comment:
   expected-end-date:
   other:
 description: >
-  [Junior] conservatoire music education with cello as main instrument.
+  Junior conservatoire music education with cello as main instrument.
+  Second instrument: trumpet.
+  Additional courses included: chamber music, string orchestra, choir, harmony, musical analysis, history of music.
 grade:
   type: Grade
   value: Notable
