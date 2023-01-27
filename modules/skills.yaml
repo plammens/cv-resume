@@ -14,6 +14,11 @@ items:
       Developed a medium-sized project for university that received the maximum score
       from both a peer review and academic markers.
     short-description: Developed a medium-sized project for university that received the maximum score.
+  - name: Dart \& Flutter
+    level: Intermediate
+    score: 3
+    description: >
+      Have been developing a Flutter app as a personal project during 2022-2023.
   - name: Java
     level: Intermediate
     score: 3
@@ -34,7 +39,7 @@ items:
       making heavy use of \texttt{pandas} and other numerical Python libraries.
     short-description: Developed a freelance 100h+ project using pandas.
   - name: \LaTeX
-    level: Lower intermediate
+    level: Intermediate
     score: 2.5
     description: >
       This document has been built with \LaTeX.
