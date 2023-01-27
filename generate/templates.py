@@ -152,6 +152,28 @@ r"""
 """
         ),
     },
+    "award": {
+        "cv": SimpleTemplate(
+r"""
+\cvchronoitem
+{{ {title} }}
+{{ {awarded-by} }}
+{{ {date} }}
+{{}}
+{{}}
+{{ {description} }}
+"""
+        ),
+        "resume": SimpleTemplate(
+r"""
+\twentyitem
+{{\noindent {date} }}
+{{ {title} }}
+{{}}
+{{ {short-description} }}
+"""
+        ),
+    },
     "contact-info": {
         "cv": SimpleTemplate(
 r"""
@@ -174,9 +196,29 @@ r"""
     },
     "skill": {
         "cv": MultiItemTemplate(
-            global_template="{items}",
+            global_template=
+r"""
+\vspace{{-5mm}}
+\begin{{itemize}}
+{items}
+\end{{itemize}}
+\vspace{{-5mm}}
+""",
             item_template=r"\item \textbf{{ {name} }} -- {level} -- "
                           r"{{ \small {description} }}",
+        ),
+        "resume": MultiItemTemplate(
+            global_template="{items}",
+            item_template=r"\item \textbf{{ {name} }} -- {level} -- "
+                          r"{{ \small {short-description} }}",
+            max_items=4,
+        )
+    },
+    "skill-compact": {
+        "cv": MultiItemTemplate(
+            global_template="{items}",
+            item_template=r"\textbf{{ {name} }} ({level})",
+            item_sep=", "
         ),
         "resume": MultiItemTemplate(
             global_template="{items}",
@@ -194,6 +236,6 @@ r"""
             global_template="{items}",
             item_template=r"{language} & \textcolor{{lgray}}{{ {level} }} \\"
         ),
-    }
+    },
 }
 # fmt: on

@@ -136,7 +136,8 @@ class YamlTexModuleGenerator(FileToFileGenerator, metaclass=ABCMeta):
         for date_field in DATE_FIELDS & fields:
             parsed[date_field] = parse_date(data[date_field])
         for text_field in TEXT_FIELDS & fields:
-            parsed[text_field] = tokenize(data[text_field])
+            text = data[text_field]
+            parsed[text_field] = tokenize(text) if text else None
         return parsed
 
     def format_base(self, parsed_data: Data) -> FormattedFields:
@@ -201,6 +202,13 @@ class ContactInfoGenerator(YamlTexModuleGenerator):
 @single_file_multiple_items
 class SkillsGenerator(YamlTexModuleGenerator):
     item_type = "skill"
+
+
+class CompactSkillsGenerator(SkillsGenerator):
+    item_type = "skill-compact"
+
+    def save(self, generated_tex: str, *, name: str, fmt: str):
+        super().save(generated_tex, name=f"{name}-compact", fmt=fmt)
 
 
 @single_file_multiple_items
@@ -320,6 +328,10 @@ class ProjectItemGenerator(YamlTexModuleGenerator):
         formatted["link"] = rf"\href{{{link}}}{{{link}}}" if link else ""
 
         return formatted
+
+
+class AwardItemGenerator(YamlTexModuleGenerator):
+    item_type = "award"
 
 
 class TexIdentityGenerator(FileToFileGenerator):

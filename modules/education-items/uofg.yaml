@@ -1,23 +1,18 @@
 degree: BSc (Hon.)
-title: Mathematics \& Computer Science
+title: Mathematics \& Computing Science
 institution: University of Glasgow
 start-date: September 2019
-end-date: present
+end-date: June 2022
 comment:
-  expected-end-date: 2022
+  expected-end-date:
   other:
 description: >
   Entered at Level 2.
-  Highlighted modules:
-  Algorithmics I,
-  Data Fundamentals,
-  Systems Programming,
-  Professional Software Development,
-  Cybersecurity Fundamentals,
-  Discrete Mathematics.
+  Won the Dougall Prize for Mathematics
+  and the (Computing Science) Class Prize for "most outstanding student".
   Activities \& Societies: HackerOlympics 2019, Chapel Choir,
   Kelvin Ensemble (First Year Representative), CodeOlympics 2020 (winner of Morgan
   Stanley challenge).
 grade:
   type: GPA
-  value: 19/22
+  value: 20.27/22
