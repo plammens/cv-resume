@@ -1,14 +1,14 @@
 degree: ''
-title: Mathematics \& Data Science
+title: Matemàtiques \& Ciència de Dades
 institution: Centre de Formació Interdisciplinària Superior (CFIS) -- Universitat Politècnica de Catalunya (UPC)
-start-date: September 2018
-end-date: June 2019
+start-date: Setembre 2018
+end-date: Juny 2019
 comment:
   expected-end-date:
-  other: discontinued
+  other: no acabat
 description: >
-  Double degree programme offered by CFIS.
-  Not completed; studies continued at the University of Glasgow.
+  Doble grau ofert pel CFIS.
+  No acabat; vaig acabar els estudis a l'Universitat de Glasgow.
 grade:
-  type: Average grade
+  type: Nota mitja
   value: 8.12/10

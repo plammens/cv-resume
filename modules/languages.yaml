@@ -1,19 +1,19 @@
 items:
-  - language: English
+  - language: Anglès
     level:
       name: C1
       framework: CEFR
       certificate: Cambridge Certificate in Advanced English
-  - language: Spanish
+  - language: Castellà
     level:
-      name: Native
-  - language: Catalan
+      name: Natiu
+  - language: Català
     level:
-      name: Native
-  - language: Italian
+      name: Natiu
+  - language: Italià
     level:
-      name: Maternal
-  - language: French
+      name: Natiu
+  - language: Francès
     level:
       name: A2
       framework: CEFR

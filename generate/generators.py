@@ -258,7 +258,7 @@ class EducationItemGenerator(YamlTexModuleGenerator):
 
         comment = data["comment"]
         formatted["comment"] = (
-            f"Expected graduation: {comment['expected-end-date']}"
+            f"Graduació prevista: {comment['expected-end-date']}"
             if comment["expected-end-date"]
             else comment["other"] or ""
         )

@@ -1,10 +1,10 @@
-title: Analysing and visualising chord sequences in music
-start-date: July 2018
-end-date: July 2018
-comment: archived
+title: "``Analysing and visualising chord sequences in music''"
+start-date: Juliol 2018
+end-date: Juliol 2018
+comment:
 link: https://community.wolfram.com/groups/-/m/t/1383630
 description: >
-  This is the project developed as part of my stay at Wolfram High School Summer Camp.
-  It involved creating a Mathematica script/application that analyses the harmony in music pieces and displays it as a transition graph.
+  Projecte desenvolupat al ``Wolfram High School Summer Camp''.
+  Va consistir en escriure un programa en el llenguatge Wolfram/Mathematica que analitza l'harmonia en peces musicals i la mostra com un graf de transició.
 short-description: >
-  Wolfram Language script that analyses the harmony in music pieces and displays it as a transition graph.
+  Programa escrit en el llenguatge Wolfram/Mathematica que analitza l'harmonia en peces musicals i la mostra com un graf de transició.

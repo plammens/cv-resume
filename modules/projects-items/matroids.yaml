@@ -1,10 +1,10 @@
-title: Dynamic Maximal Independent Set on a Matroid
-start-date: September 2021
-end-date: April 2022
-comment: archived
+title: "``Dynamic Maximal Independent Set on a Matroid''"
+start-date: Setembre 2021
+end-date: Abril 2022
+comment:
 link: https://shorturl.at/bsX18
 description: >
-  My bachelor's thesis. I characterized the dynamic independent set optimization problem on matroids,
-  developed some algorithms and proved their properties, along with some empirical tests.
+  Treball de fi de grau. Vaig caracteritzar el problema d'optimització del conjunt independent dinàmic als matroides,
+  i vaig desenvolupar alguns algorismes i en vaig demostrar algunes proprietats, a més d'algunes proves empíriques.
 short-description: >
-  My bachelor's thesis.
+  Treball de fi de grau.

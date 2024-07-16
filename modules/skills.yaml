@@ -1,45 +1,45 @@
 items:
   - name: Python
-    level: Fluent
+    level: Avançat
     score: 4
     description: >
-      Have been programming in Python for fun and for school for 5 years. Contributed to
-      open source Python repositories. Achieved a 5 star rating within 6 months as a
-      Python tutor on Superprof.
-    short-description: Have been programming in Python for fun and for school for 5 years.
+      He estat programant en Python per diversió i per educació des dels 14. 
+      He contribuït a diversos repositoris Open Source. 
+      Vaig assolir una valoració de 5 estrelles en 6 mesos com a professor de Python a la plataforma Superprof.
+    short-description: He estat programant en Python per diversió i per educació des dels 14.
   - name: C++
-    level: Intermediate
+    level: Intermig
     score: 3
     description: >
-      Developed a medium-sized project for university that received the maximum score
-      from both a peer review and academic markers.
-    short-description: Developed a medium-sized project for university that received the maximum score.
+      He desenvolupat un projecte pels estudis universitaris que ha rebut la nota màxima
+      tant del ``peer review'' com dels evaluadors acadèmics.
+    short-description: He desenvolupat un projecte pels estudis universitaris que ha rebut la nota màxima.
   - name: Dart \& Flutter
-    level: Intermediate
+    level: Intermig
     score: 3
     description: >
-      Have been developing a Flutter app as a personal project during 2022-2023.
+      He estat desenvolupant una aplicació Flutter com a projecte personal des del 2022.
   - name: Java
-    level: Intermediate
+    level: Intermig
     score: 3
     description: >
-      Used to develop assignments at UofG.
+      He utilitzat Java per les entregues a l'Universitat de Glasgow.
   - name: Git
-    level: Advanced
+    level: Avançat
     score: 3.5
     description: >
-      Have 30+ repositories involving multiple branches, forks,
-      Git submodules, etc. Contributed to open source repositories on GitHub.
-    short-description: Have 30+ repositories involving multiple branches, forks, Git submodules, etc.
+      Tinc més de 30 repositoris amb múltiples branques, forks, Git submodules, etc. 
+      He contribuït a diversos repositoris Open Source a GitHub.
+    short-description: Tinc més de 30 repositoris amb múltiples branques, forks, Git submodules, etc.
   - name: \texttt{pandas}
-    level: Advanced
+    level: Avançat
     score: 3.5
     description: >
-      Developed on a freelance basis a 100h+ data-centric Python project
-      making heavy use of \texttt{pandas} and other numerical Python libraries.
+      He desenvolupat un projecte d'analisi de dàdes de més de 100 hores 
+      utilitzant extensivament \texttt{pandas} i altres llibreries numèriques de Python.
     short-description: Developed a freelance 100h+ project using pandas.
   - name: \LaTeX
-    level: Intermediate
+    level: Intermig
     score: 2.5
     description: >
-      This document has been built with \LaTeX.
+      Aquest document ha estat confeccionat en \LaTeX.

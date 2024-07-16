@@ -1,12 +1,13 @@
-degree: MSc
-title: Algebra, Geometry and Number Theory
-institution: Universiteit Leiden \& Université de Bordeaux
-start-date: September 2023
-end-date: present
 comment:
-  expected-end-date: June 2025
-  other:
-description: >
-  Erasmus Mundus master's programme ALGANT.
-  First year in Leiden and second year in Bordeaux.
-grade:
+  expected-end-date: Juny 2025
+  other: null
+degree: Màster
+description: 'Programa de màster Erasmus Mundus ALGANT. Primer any a Leiden i segon
+  any a Bordeus.
+
+  '
+end-date: present
+grade: null
+institution: Universiteit Leiden \& Université de Bordeaux
+start-date: Setembre 2023
+title: Àlgebra, Geometria i Teoria de Nombres

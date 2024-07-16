@@ -1,18 +1,18 @@
-degree: BSc (Hon.)
-title: Mathematics \& Computing Science
-institution: University of Glasgow
-start-date: September 2019
-end-date: June 2022
 comment:
-  expected-end-date:
-  other:
-description: >
-  Entered at Level 2.
-  Won the Dougall Prize for Mathematics
-  and the (Computing Science) Class Prize for "most outstanding student".
-  Activities \& Societies: HackerOlympics 2019, Chapel Choir,
-  Kelvin Ensemble (First Year Representative), CodeOlympics 2020 (winner of Morgan
-  Stanley challenge).
+  expected-end-date: null
+  other: null
+degree: BSc (Hon.)
+description: 'Vaig entrar a Nivell 2. Vaig guanyar el Premi Dougall per Matemàtiques
+  i el Premi de Classe (Ciències de la Computació) per a l''estudiant més destacat.
+  Activitats dutes a terme: HackerOlympics 2019, Coral de la Capella, Kelvin Ensemble
+  (representant de primer any), CodeOlympics 2020 (guanyador del desafiament de Morgan
+  Stanley).
+
+  '
+end-date: Juny 2022
 grade:
   type: GPA
   value: 20.27/22
+institution: University of Glasgow
+start-date: Setembre 2019
+title: Matemàtiques i Ciències de la Computació

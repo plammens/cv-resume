@@ -1,13 +1,12 @@
-degree: Grau Professional
-title: Cello
 institution: Conservatori de Sant Cugat
-start-date: October 2010
-end-date: June 2018
+start-date: Octubre 2010
+title: Violoncel
 comment:
-  expected-end-date:
-  other:
-description: >
-  [Junior] conservatoire music education with cello as main instrument.
+  expected-end-date: null
+  other: null
+degree: Grau Professional
+description:
+end-date: Juny 2018
 grade:
-  type: Grade
+  type: Qualificació
   value: Notable

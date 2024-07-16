@@ -1,11 +1,11 @@
-degree:
-title: Cello
-institution: Aula de So
-start-date: September 2004
-end-date: June 2005
 comment:
-  expected-end-date:
-  other:
-description: >
-  Beginner music education with cello as main instrument.
-grade:
+  expected-end-date: null
+  other: null
+degree: null
+description: 'Educació musical per a principiants amb el violoncel com a instrument
+  principal.'
+end-date: Juny 2005
+grade: null
+institution: Aula de So
+start-date: Setembre 2004
+title: Violoncello

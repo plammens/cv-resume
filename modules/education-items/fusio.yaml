@@ -1,11 +1,12 @@
-degree:
-title: Music theory \& cello
-institution: Escola de Música Fusió
-start-date: September 2006
-end-date: June 2008
 comment:
-  expected-end-date:
-  other:
-description: >
-  Elementary music education with cello as main instrument.
-grade:
+  expected-end-date: null
+  other: null
+degree: null
+description: 'Educació musical elemental amb el violoncel com a instrument principal.
+
+  '
+end-date: Juny 2008
+grade: null
+institution: Escola de Música Fusió
+start-date: Setembre 2006
+title: Teoria musical & violoncel
