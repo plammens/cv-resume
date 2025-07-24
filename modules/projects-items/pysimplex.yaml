@@ -2,7 +2,7 @@ title: "``PySimplex''"
 start-date: Novembre 2018
 end-date: Novembre 2018
 comment:
-link: https://github.com/plammens/PySimplex
+link: github.com/plammens/PySimplex
 description: >
   Implementació senzilla en Python de l'algorisme del simplex primal d'optimització lineal.
   Basat en una entrega del curs de Programació Matemàtica a l'UPC.

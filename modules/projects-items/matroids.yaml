@@ -2,7 +2,7 @@ title: "``Dynamic Maximal Independent Set on a Matroid''"
 start-date: Setembre 2021
 end-date: Abril 2022
 comment:
-link: https://shorturl.at/bsX18
+link: shorturl.at/bsX18
 description: >
   Treball de fi de grau. Vaig caracteritzar el problema d'optimització del conjunt independent dinàmic als matroides,
   i vaig desenvolupar alguns algorismes i en vaig demostrar algunes proprietats, a més d'algunes proves empíriques.

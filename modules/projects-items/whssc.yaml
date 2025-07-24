@@ -2,7 +2,7 @@ title: "``Analysing and visualising chord sequences in music''"
 start-date: Juliol 2018
 end-date: Juliol 2018
 comment:
-link: https://community.wolfram.com/groups/-/m/t/1383630
+link: community.wolfram.com/groups/-/m/t/1383630
 description: >
   Projecte desenvolupat al ``Wolfram High School Summer Camp''.
   Va consistir en escriure un programa en el llenguatge Wolfram/Mathematica que analitza l'harmonia en peces musicals i la mostra com un graf de transició.

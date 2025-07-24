@@ -1,13 +1,13 @@
-comment:
-  expected-end-date: Juny 2025
-  other: null
 degree: Màster
 description: 'Programa de màster Erasmus Mundus ALGANT. Primer any a Leiden i segon
   any a Bordeus.
 
   '
-end-date: present
+end-date: Juny 2025
 grade: null
 institution: Universiteit Leiden \& Université de Bordeaux
 start-date: Setembre 2023
+comment:
+  expected-end-date: null
+  other: null
 title: Àlgebra, Geometria i Teoria de Nombres

@@ -4,9 +4,19 @@ items:
     score: 4
     description: >
       He estat programant en Python per diversió i per educació des dels 14. 
-      He contribuït a diversos repositoris Open Source. 
+      He contribuït a diversos repositoris Open Source.
       Vaig assolir una valoració de 5 estrelles en 6 mesos com a professor de Python a la plataforma Superprof.
     short-description: He estat programant en Python per diversió i per educació des dels 14.
+  - name: Dart \& Flutter
+    level: Avançat
+    score: 4
+    description: >
+      He estat desenvolupant una aplicació en Flutter per ús personal des de 2022.
+  - name: Firebase \& Google Cloud
+    level: Principiant
+    score: 3
+    description: >
+      He utilitzat Firebase per desenvolupar una aplicació Flutter.
   - name: C++
     level: Intermig
     score: 3
@@ -14,18 +24,13 @@ items:
       He desenvolupat un projecte pels estudis universitaris que ha rebut la nota màxima
       tant del ``peer review'' com dels evaluadors acadèmics.
     short-description: He desenvolupat un projecte pels estudis universitaris que ha rebut la nota màxima.
-  - name: Dart \& Flutter
-    level: Intermig
-    score: 3
-    description: >
-      He estat desenvolupant una aplicació Flutter com a projecte personal des del 2022.
   - name: Java
     level: Intermig
     score: 3
     description: >
       He utilitzat Java per les entregues a l'Universitat de Glasgow.
   - name: Git
-    level: Avançat
+    level: Intermig
     score: 3.5
     description: >
       Tinc més de 30 repositoris amb múltiples branques, forks, Git submodules, etc. 
