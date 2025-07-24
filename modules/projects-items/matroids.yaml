@@ -2,7 +2,7 @@ title: Dynamic Maximal Independent Set on a Matroid
 start-date: September 2021
 end-date: April 2022
 comment: archived
-link: https://shorturl.at/bsX18
+link: shorturl.at/bsX18
 description: >
   My bachelor's thesis. I characterized the dynamic independent set optimization problem on matroids,
   developed some algorithms and proved their properties, along with some empirical tests.
