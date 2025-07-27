@@ -95,7 +95,7 @@ r"""
 {{{start-date}}}
 {{{end-date}}}
 {{{comment}}}
-{{{description}}}
+{{ }}
 """
         ),
         "resume": SimpleTemplate(
@@ -117,7 +117,7 @@ r"""
 {{ {start-date} }}
 {{ {end-date} }}
 {{{comment}}}
-{{ {description} }}
+{{ }}
 """
         ),
         "resume": SimpleTemplate(
