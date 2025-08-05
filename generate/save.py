@@ -49,7 +49,7 @@ def save_output(
 
 def save_tex(tex: str, type_name: str, name: str, output_dir=ROOT_OUTPUT_PATH):
     def save_func(path):
-        with open(path, "w") as f:
+        with open(path, "w", encoding="utf-8") as f:
             f.write(tex)
 
     save_output(
