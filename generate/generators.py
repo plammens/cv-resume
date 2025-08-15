@@ -96,7 +96,7 @@ class FileToFileGenerator(AbstractTexModuleGenerator, metaclass=ABCMeta):
         """Generate single file"""
         name = os.path.basename(path).rsplit(".")[0]
         logger.debug("%s processing %s (%s)", self.__class__.__name__, name, path)
-        with open(path) as f:
+        with open(path, encoding="utf-8") as f:
             data = self.parse(self.read(f))
         for fmt in self.formatters:
             tex = self.generate(data, fmt)
