@@ -1,0 +1,16 @@
+title: Sentiment Polarity Classification of Reddit Posts
+start-date: April 2021
+end-date: April 2021
+link: null
+comment: archived
+description: >
+  Developed and evaluated various machine learning models for sentiment polarity 
+  classification of text as part of coursework at UofG. 
+  Explored several models including logistic regression, 
+  Random Forest, and a linear SVC.
+  The best-performing baseline model achieved a weighted-average F1 score of about 0.73. 
+  The project involved a comprehensive analysis of model errors 
+  and the effectiveness of different features for this task.
+short-description: >
+  Developed and evaluated machine learning models for sentiment polarity classification 
+  of Reddit posts as part of a university course.
