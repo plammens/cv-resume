@@ -1,12 +1,16 @@
 items:
   - name: Python
     level: Fluent
-    score: 4
+    score: 5
     description: >
       Have been programming in Python for fun and for school for 5 years. Contributed to
       open source Python repositories. Achieved a 5 star rating within 6 months as a
       Python tutor on Superprof.
     short-description: Have been programming in Python for fun and for school for 5 years.
+  - name: SQL
+    level: Advanced
+    score: 4
+    description: Can use SQL for querying and managing complex databases.
   - name: Machine Learning
     level: Intermediate
     score: 3
