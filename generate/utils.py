@@ -3,7 +3,7 @@ from collections import namedtuple
 from typing import Any, Callable, Dict, Union
 
 # helper types / type aliases
-MonthDate = namedtuple("Date", ["year", "month"])
+MonthDate = namedtuple("MonthDate", ["year", "month"])
 Data = Dict[str, Any]
 FormattedFields = Dict[str, str]
 Parser = Callable[[Data], Data]

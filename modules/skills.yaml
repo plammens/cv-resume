@@ -1,7 +1,7 @@
 items:
   - name: Python
     level: Fluent
-    score: 4
+    score: 5
     description: >
       Have been programming in Python for fun and for school for over 5 years. 
       Contributed to open source Python repositories such as pandas and networkx. 
@@ -9,6 +9,10 @@ items:
       Developed many personal, freelance and academic projects.
       Rewrote a data validation framework during my internship at WoodMackenzie.
     short-description: Have been programming in Python for fun and for school for over 5 years.
+  - name: SQL
+    level: Advanced
+    score: 4
+    description: Can use SQL for querying and managing complex databases.
   - name: Machine Learning
     level: Intermediate
     score: 3
