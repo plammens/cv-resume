@@ -10,9 +10,9 @@ items:
       Rewrote a data validation framework during my internship at WoodMackenzie.
     short-description: Have been programming in Python for fun and for school for over 5 years.
   - name: SQL
-    level: Advanced
-    score: 4
-    description: Can use SQL for querying and managing complex databases.
+    level: Intermediate
+    score: 3
+    description: Can use SQL for most routine tasks, and can easily learn the rest in an afternoon if needed.
   - name: Machine Learning
     level: Intermediate
     score: 3
