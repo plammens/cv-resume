@@ -1,5 +1,5 @@
 degree: MSc
-title: Algebra, Geometry and Number Theory
+title: Algebra, Geometry and Number Theory (ALGANT)
 institution: Universiteit Leiden \& Université de Bordeaux
 start-date: September 2023
 end-date: June 2025
@@ -7,10 +7,11 @@ comment:
     expected-end-date:
     other:
 description: >
-  Erasmus Mundus master's programme ALGANT.
-  First year in Leiden and second year in Bordeaux.
+  Research-oriented Erasmus Mundus Master's in pure mathematics delivered across top European universities.
   Courses taken: Algorithmic Number Theory, Post-Quantum Cryptography, Category Theory, 
   Topos Theory, Commutative Algebra, Algebraic Geometry, Algebraic Number Theory,
   Topics in Algebraic Topology, Homological Algebra, Differentiable Manifolds, 
   Representation Theory.
 grade:
+  type: GPA
+  value: 8.48/10
