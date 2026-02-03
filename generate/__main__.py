@@ -1,18 +1,6 @@
 import argparse
-import logging
 
-from .generators import (
-    AwardItemGenerator,
-    CompactSkillsGenerator, ContactInfoGenerator,
-    CourseItemGenerator,
-    EducationItemGenerator,
-    ExperienceItemGenerator,
-    LanguagesGenerator,
-    ProjectItemGenerator,
-    SkillsGenerator,
-    TexIdentityGenerator,
-    WorkItemGenerator,
-)
+from .generators import *
 
 logger = logging.getLogger()
 
@@ -48,12 +36,19 @@ def main(**kwargs):
     SkillsGenerator().generate_file("modules/skills.yaml")
     CompactSkillsGenerator().generate_file("modules/skills.yaml")
     LanguagesGenerator().generate_file("modules/languages.yaml")
-    EducationItemGenerator().generate_dir("modules/education-items")
-    WorkItemGenerator().generate_dir("modules/work-items")
-    ExperienceItemGenerator().generate_dir("modules/experience-items")
-    CourseItemGenerator().generate_dir("modules/courses-items")
-    ProjectItemGenerator().generate_dir("modules/projects-items")
-    AwardItemGenerator().generate_dir("modules/awards-items")
+
+    (education := EducationItemGenerator()).generate_dir("modules/education-items")
+    AllItemsByDateGenerator(education).generate_dir("modules/education-items")
+    (work := WorkItemGenerator()).generate_dir("modules/work-items")
+    AllItemsByDateGenerator(work).generate_dir("modules/work-items")
+    (experience := ExperienceItemGenerator()).generate_dir("modules/experience-items")
+    AllItemsByDateGenerator(experience).generate_dir("modules/experience-items")
+    (course := CourseItemGenerator()).generate_dir("modules/courses-items")
+    AllItemsByDateGenerator(course).generate_dir("modules/courses-items")
+    (project := ProjectItemGenerator()).generate_dir("modules/projects-items")
+    AllItemsByDateGenerator(project).generate_dir("modules/projects-items")
+    (award := AwardItemGenerator()).generate_dir("modules/awards-items")
+    AllItemsByDateGenerator(award).generate_dir("modules/awards-items")
 
 
 def define_cli():

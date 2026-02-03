@@ -1,14 +1,16 @@
 items:
   - name: Python
     level: Fluent
-    score: 4
+    score: 5
     description: >
-      Have been programming in Python for fun and for school for over 5 years. 
-      Contributed to open source Python repositories such as pandas and networkx. 
-      Achieved a 5 star rating within 6 months as a Python tutor on Superprof.
-      Developed many personal, freelance and academic projects.
-      Rewrote a data validation framework during my internship at WoodMackenzie.
-    short-description: Have been programming in Python for fun and for school for over 5 years.
+      Have been programming in Python for fun and for school for 5 years. Contributed to
+      open source Python repositories. Achieved a 5 star rating within 6 months as a
+      Python tutor on Superprof.
+    short-description: Have been programming in Python for fun and for school for 5 years.
+  - name: SQL
+    level: Intermediate
+    score: 3
+    description: Can use SQL for most routine tasks, and can easily learn the rest in an afternoon if needed.
   - name: Machine Learning
     level: Intermediate
     score: 3
