@@ -3,14 +3,14 @@ items:
     level: Fluent
     score: 5
     description: >
-      Have been programming in Python for fun and for school for 5 years. Contributed to
-      open source Python repositories. Achieved a 5 star rating within 6 months as a
-      Python tutor on Superprof.
+      Have been programming in Python for fun, school and work for \textgreater 10 years. 
+      Contributed to open source Python repositories such as \texttt{pandas}.
+      Achieved a 5 star rating within 6 months as a Python tutor on Superprof.
     short-description: Have been programming in Python for fun and for school for 5 years.
   - name: SQL
     level: Intermediate
     score: 3
-    description: Can use SQL for most routine tasks, and can easily learn the rest in an afternoon if needed.
+    description: Can make complex queries for analysis.
   - name: Machine Learning
     level: Intermediate
     score: 3
